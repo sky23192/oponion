@@ -16,7 +16,8 @@ import com.app.oponion.R;
 public class CircleFragment extends Fragment
 {
 
-    public CircleFragment(){
+    public CircleFragment()
+    {
 
     }
 
@@ -25,7 +26,7 @@ public class CircleFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
 
-        View v=inflater.inflate(R.layout.circle_fragment,container,false);
+        View v = inflater.inflate(R.layout.circle_fragment, container, false);
 
         return v;
     }

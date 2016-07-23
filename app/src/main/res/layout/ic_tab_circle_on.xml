@@ -6,4 +6,4 @@
     android:layout_height="50dp"
     android:layout_gravity="center"
     android:gravity="center"
-    android:src="@mipmap/circle_on"/>
+    android:src="@drawable/ic_circle_on"/>

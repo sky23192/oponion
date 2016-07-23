@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity
 
     final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-    View icTabCircleOn,icTabCircleOff,icTabOnionOn,icTabOnionOff,icTabSpotlightOn,icTabSpotlightOff;
+    View icTabCircleOn, icTabCircleOff, icTabOnionOn, icTabOnionOff, icTabSpotlightOn, icTabSpotlightOff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,12 +32,12 @@ public class MainActivity extends AppCompatActivity
 
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-        icTabCircleOn=LayoutInflater.from(this).inflate(R.layout.ic_tab_circle_on,null);
-        icTabCircleOff=LayoutInflater.from(this).inflate(R.layout.ic_tab_circle_off,null);
-        icTabOnionOn=LayoutInflater.from(this).inflate(R.layout.ic_tab_onion_on,null);
-        icTabOnionOff=LayoutInflater.from(this).inflate(R.layout.ic_tab_onion_off,null);
-        icTabSpotlightOn=LayoutInflater.from(this).inflate(R.layout.ic_tab_spotlight_on,null);
-        icTabSpotlightOff=LayoutInflater.from(this).inflate(R.layout.ic_tab_spotlight_off,null);
+        icTabCircleOn = LayoutInflater.from(this).inflate(R.layout.ic_tab_circle_on, null);
+        icTabCircleOff = LayoutInflater.from(this).inflate(R.layout.ic_tab_circle_off, null);
+        icTabOnionOn = LayoutInflater.from(this).inflate(R.layout.ic_tab_onion_on, null);
+        icTabOnionOff = LayoutInflater.from(this).inflate(R.layout.ic_tab_onion_off, null);
+        icTabSpotlightOn = LayoutInflater.from(this).inflate(R.layout.ic_tab_spotlight_on, null);
+        icTabSpotlightOff = LayoutInflater.from(this).inflate(R.layout.ic_tab_spotlight_off, null);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setOffscreenPageLimit(2);
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
 
 
         adapter.addFragment(new OponionFragment(), "OPONION");
-        adapter.addFragment(new SpotlightFragment(), "SPOTLIGHT");
+        adapter.addFragment(SpotlightFragment.getInstance(this), "SPOTLIGHT");
         adapter.addFragment(new CircleFragment(), "CIRCLE");
 
         viewPager.setAdapter(adapter);

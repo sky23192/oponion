@@ -15,7 +15,8 @@ import com.app.oponion.R;
 
 public class OponionFragment extends Fragment
 {
-    public OponionFragment(){
+    public OponionFragment()
+    {
 
     }
 
@@ -23,8 +24,7 @@ public class OponionFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-
-        View v=inflater.inflate(R.layout.circle_fragment,container,false);
+        View v = inflater.inflate(R.layout.circle_fragment, container, false);
 
         return v;
     }

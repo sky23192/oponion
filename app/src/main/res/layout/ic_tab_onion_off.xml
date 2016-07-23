@@ -6,4 +6,4 @@
     android:layout_height="40dp"
     android:layout_gravity="center"
     android:gravity="center"
-    android:src="@mipmap/onion_off"/>
+    android:src="@drawable/ic_onion_off"/>
