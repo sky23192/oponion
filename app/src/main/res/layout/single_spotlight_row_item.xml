@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
-                android:textSize="11sp"
+                android:textSize="@dimen/vote_count_text"
                 android:text="99999"/>
 
             <ImageView
