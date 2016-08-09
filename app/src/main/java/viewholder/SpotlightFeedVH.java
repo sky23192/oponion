@@ -11,14 +11,14 @@ import android.widget.TextView;
 import com.app.oponion.R;
 import com.squareup.picasso.Picasso;
 
+import component.FeedItem;
 import model.SpotlightFeed;
 
 /**
  * Created by rutvik on 13-07-2016 at 06:26 PM.
  */
 
-public class SpotlightFeedVH extends RecyclerView.ViewHolder
-{
+public class SpotlightFeedVH extends RecyclerView.ViewHolder implements FeedItem {
 
     ImageView ivFeedImage, ivBtnUpVote, ivBtnDownVote, ivLocationImage;
 
@@ -28,8 +28,7 @@ public class SpotlightFeedVH extends RecyclerView.ViewHolder
 
     SpotlightFeed model;
 
-    public SpotlightFeedVH(Context context, View itemView)
-    {
+    public SpotlightFeedVH(Context context, View itemView) {
         super(itemView);
         this.context = context;
         tvFeedTitle = (TextView) itemView.findViewById(R.id.tv_title);
@@ -40,27 +39,22 @@ public class SpotlightFeedVH extends RecyclerView.ViewHolder
         ivBtnUpVote = (ImageView) itemView.findViewById(R.id.iv_upVote);
         ivBtnDownVote = (ImageView) itemView.findViewById(R.id.iv_downVote);
 
-        ivBtnUpVote.setOnClickListener(new View.OnClickListener()
-        {
+        ivBtnUpVote.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 model.totalVotes = model.totalVotes + 1;
             }
         });
 
-        ivBtnDownVote.setOnClickListener(new View.OnClickListener()
-        {
+        ivBtnDownVote.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 model.totalVotes = model.totalVotes - 1;
             }
         });
     }
 
-    public static SpotlightFeedVH create(Context context, ViewGroup parent)
-    {
+    public static SpotlightFeedVH create(Context context, ViewGroup parent) {
 
         SpotlightFeedVH spotlightFeedVH = new SpotlightFeedVH(context,
                 LayoutInflater.from(context).inflate(R.layout.single_spotlight_row_item, parent, false));
@@ -69,13 +63,11 @@ public class SpotlightFeedVH extends RecyclerView.ViewHolder
 
     }
 
-    public static void bind(SpotlightFeedVH holder, SpotlightFeed model)
-    {
+    public static void bind(SpotlightFeedVH holder, SpotlightFeed model) {
         holder.model = model;
         holder.tvFeedTitle.setText(holder.model.feedTitle);
         holder.tvTotalVotes.setText(String.valueOf(holder.model.totalVotes));
-        if (model.feedImageUrl != null && model.locationImage != null)
-        {
+        if (model.feedImageUrl != null && model.locationImage != null) {
             Picasso.with(holder.context).load(holder.model.feedImageUrl).into(holder.ivFeedImage);
             Picasso.with(holder.context).load(holder.model.locationImage).into(holder.ivLocationImage);
         }

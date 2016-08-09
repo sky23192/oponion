@@ -11,13 +11,14 @@ import android.widget.TextView;
 import com.app.oponion.R;
 import com.squareup.picasso.Picasso;
 
+import component.FeedItem;
 import extra.CircleTransform;
 import model.CircleSimpleFeed;
 
 /**
  * Created by mw on 27-07-2016.
  */
-public class CircleSimpleFeedVH extends RecyclerView.ViewHolder {
+public class CircleSimpleFeedVH extends RecyclerView.ViewHolder implements FeedItem {
 
 
     CircleSimpleFeed model;
