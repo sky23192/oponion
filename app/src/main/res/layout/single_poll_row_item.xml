@@ -88,20 +88,13 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/ll_progressContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:orientation="vertical"
                 android:layout_marginTop="3dp">
 
-                <progressviews.LineProgressBar
-                    android:id="@+id/pb_linear"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    app:bar_color="#d4d1d1"
-                    app:bar_width="20dp"
-                    app:progress="55"
-                    app:progress_color="#5949a3"
-                    app:progress_width="20dp" />
+
 
             </LinearLayout>
 

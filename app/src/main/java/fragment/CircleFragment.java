@@ -14,12 +14,14 @@ import android.view.ViewGroup;
 import com.app.oponion.R;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import adapter.CircleFeedAdapter;
 import adapter.SpotlightFeedsAdapter;
 import model.CircleSimpleFeed;
 import model.PollFeed;
+import model.SinglePollOption;
 import viewholder.PollFeedVH;
 
 /**
@@ -36,7 +38,7 @@ public class CircleFragment extends Fragment {
 
     CircleFeedAdapter adapter;
 
-    private int count=-1;
+    private int count = -1;
 
     public CircleFragment() {
 
@@ -89,7 +91,7 @@ public class CircleFragment extends Fragment {
 
             csf1.setContentImageUrl("http://www.digitalintervention.com/wp-content/uploads/2016/07/Android-Nougat-banner.jpg");
 
-            adapter.addSimpleFeed(++count,csf1);
+            adapter.addSimpleFeed(++count, csf1);
 
 
             CircleSimpleFeed csf2 = new CircleSimpleFeed("Rutvik Mehta",
@@ -101,7 +103,7 @@ public class CircleFragment extends Fragment {
 
             csf2.setContentImageUrl("http://s1.thingpic.com/images/Vg/vPTFgMp2SJ8QQCMiNbdGLBGg.jpeg");
 
-            adapter.addSimpleFeed(++count,csf2);
+            adapter.addSimpleFeed(++count, csf2);
 
             CircleSimpleFeed csf3 = new CircleSimpleFeed("Abbas kharodawala",
                     "https://lh3.googleusercontent.com/-FffqJSvWgoM/AAAAAAAAAAI/AAAAAAAAAFc/O-PfLgisbgQ/s120-c/photo.jpg",
@@ -112,11 +114,23 @@ public class CircleFragment extends Fragment {
 
             csf3.setTags(tags);
 
-            adapter.addSimpleFeed(++count,csf3);
+            adapter.addSimpleFeed(++count, csf3);
 
-            PollFeed pf1 = new PollFeed();
 
-            adapter.addPollFeed(++count,pf1);
+            final List<SinglePollOption> pollOptionList = new LinkedList<>();
+
+            pollOptionList.add(new SinglePollOption("1", "moto g4", "80"));
+            pollOptionList.add(new SinglePollOption("2", "iphone", "10"));
+            pollOptionList.add(new SinglePollOption("3", "oppo", "10"));
+
+            PollFeed pf1 = new PollFeed("https://lh3.googleusercontent.com/-FffqJSvWgoM/AAAAAAAAAAI/AAAAAAAAAFc/O-PfLgisbgQ/s120-c/photo.jpg",
+                    "Rutvik Mehta",
+                    "which is the best phone?",
+                    pollOptionList,
+                    122);
+            pf1.setTags(tags);
+
+            adapter.addPollFeed(++count, pf1);
 
         }
 
