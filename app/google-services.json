@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "103219118166",
+    "firebase_url": "https://oponion-bccd6.firebaseio.com",
+    "project_id": "oponion-bccd6",
+    "storage_bucket": "oponion-bccd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103219118166:android:91a10fc588025366",
+        "android_client_info": {
+          "package_name": "com.app.oponion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103219118166-bj2qhk6u3gpej7piuj5qulpf9nqernh4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.oponion",
+            "certificate_hash": "AAC9EF670EF9753633E284E25BD0ED510AC60C79"
+          }
+        },
+        {
+          "client_id": "103219118166-snogkql1ro08kla8ljane83d2p01itho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo_R_bkhgMlBuHYbo_NJULpMfzOgoUchI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103219118166-snogkql1ro08kla8ljane83d2p01itho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

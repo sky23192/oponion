@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity
     {
 
 
-        adapter.addFragment(new OponionFragment(), "OPONION");
+        adapter.addFragment(CircleFragment.getInstance(this), "CIRCLE");
         adapter.addFragment(SpotlightFragment.getInstance(this), "SPOTLIGHT");
-        adapter.addFragment(new CircleFragment(), "CIRCLE");
+        adapter.addFragment(new OponionFragment(), "OPONION");
 
         viewPager.setAdapter(adapter);
 

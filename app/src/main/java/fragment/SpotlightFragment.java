@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +49,7 @@ public class SpotlightFragment extends Fragment
 
         rvSpotlightFeeds=(RecyclerView) view.findViewById(R.id.rv_spotlightFeeds);
 
-        rvSpotlightFeeds.setLayoutManager(new LinearLayoutManager(context));
+        rvSpotlightFeeds.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
         rvSpotlightFeeds.setHasFixedSize(true);
 
@@ -58,7 +60,7 @@ public class SpotlightFragment extends Fragment
         for(int i=0;i<=10;i++)
         {
 
-            adapter.addSpotlightFeed(new SpotlightFeed("Indian PM Narendra Modi be like",
+            adapter.addSpotlightFeed(new SpotlightFeed("Indian PM Narendra Modi",
                     "http://icons.iconarchive.com/icons/custom-icon-design/round-world-flags/256/India-icon.png",
                     "http://img-9gag-fun.9cache.com/photo/aj68AER_700b.jpg",
                     835));
@@ -72,6 +74,23 @@ public class SpotlightFragment extends Fragment
                     "http://img.freeflagicons.com/thumb/round_icon/canada/canada_640.png",
                     "http://st.motortrend.com/uploads/sites/5/2016/05/2017-Tesla-Model-3-front-three-quarter-03.jpg",
                     9200));
+
+            adapter.addSpotlightFeed(new SpotlightFeed("Pokemon GO - Big news update",
+                    "https://images-eu.ssl-images-amazon.com/images/I/41GTY%2BVLyOL._AC_UL320_SR306,320_.jpg",
+                    "https://i.ytimg.com/vi/QIypLsv-3FQ/maxresdefault.jpg",
+                    1200));
+
+            adapter.addSpotlightFeed(new SpotlightFeed("Big rockets!",
+                    "http://img.freeflagicons.com/thumb/round_icon/canada/canada_640.png",
+                    "http://starshipnivan.com/blog/wp-content/uploads/2009/09/Apollo-1.jpg",
+                    1212));
+
+            adapter.addSpotlightFeed(new SpotlightFeed("Snow in Australia",
+                    "http://img.freeflagicons.com/thumb/round_icon/france/france_640.png",
+                    "http://img-9gag-fun.9cache.com/photo/ajDEbGq_460s.jpg",
+                    300));
+
+
         }
 
 

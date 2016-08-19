@@ -6,4 +6,4 @@
     android:layout_height="40dp"
     android:layout_gravity="center"
     android:gravity="center"
-    android:src="@drawable/ic_spotlight_off"/>
+    android:src="@drawable/ic_shout_off"/>

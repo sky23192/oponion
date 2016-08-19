@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_progressBarComponent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:weightSum="6">
+
+    <RelativeLayout
+        android:id="@+id/rl_progressBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <progressviews.LineProgressBar
+            android:id="@+id/pb_poll"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            app:bar_color="#d4d1d1"
+            app:bar_width="20dp"
+            app:progress="55"
+            app:progress_color="#5949a3"
+            app:progress_width="20dp" />
+
+
+        <TextView
+            android:id="@+id/tv_progressLabel"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="hello world"
+            android:textColor="@android:color/white" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_pollVotes3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/pb_poll"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:text="100%"
+        android:textColor="@android:color/black" />
+
+
+</LinearLayout>
