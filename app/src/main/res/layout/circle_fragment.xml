@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        app:cardCornerRadius="3dp"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        app:cardCornerRadius="3dp">
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_circleFeeds"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
 
     </android.support.v7.widget.CardView>
 
-</LinearLayout>
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_newShout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_clear_black_24dp"
+        app:fab_size="mini"
+
+        app:fab_elevationCompat="4dp" />
+
+</FrameLayout>

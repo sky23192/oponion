@@ -6,8 +6,8 @@
 
     <dimen name="vote_count_text">11sp</dimen>
 
-    
-     <!-- GENERAL -->
+
+    <!-- GENERAL -->
     <dimen name="default_stroke_width">7dp</dimen>
     <dimen name="default_background_stroke_width">3dp</dimen>
 </resources>
