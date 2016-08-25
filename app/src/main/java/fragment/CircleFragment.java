@@ -137,7 +137,7 @@ public class CircleFragment extends Fragment {
             pollOptionList.add(new SinglePollOption("2", "iphone", "10"));
             pollOptionList.add(new SinglePollOption("3", "oppo", "10"));
 
-            PollFeed pf1 = new PollFeed("https://lh3.googleusercontent.com/-FffqJSvWgoM/AAAAAAAAAAI/AAAAAAAAAFc/O-PfLgisbgQ/s120-c/photo.jpg",
+            PollFeed pf1 = new PollFeed("https://lh3.googleusercontent.com/-8twv_aWLqtY/AAAAAAAAAAI/AAAAAAAAAQ8/K1r--rxdH3w/s120-c/photo.jpg",
                     "Rutvik Mehta",
                     "which is the best phone?",
                     pollOptionList,

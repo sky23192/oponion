@@ -23,7 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityNewShout"></activity>
+        <activity android:name=".ActivityNewShout"
+            android:windowSoftInputMode=""></activity>
     </application>
 
 </manifest>
