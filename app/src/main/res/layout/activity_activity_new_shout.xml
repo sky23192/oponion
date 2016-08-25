@@ -43,25 +43,24 @@
     <RelativeLayout
         android:id="@+id/rv_bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
         android:layout_marginTop="2dp"
         android:gravity="center"
         android:padding="5dp">
 
         <ImageView
             android:id="@+id/iv_gallery"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:scaleType="center"
             android:src="@drawable/ic_photo_camera_black_24dp"
             android:tint="@color/darkGrey" />
 
         <ImageView
             android:id="@+id/iv_textBold"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_toRightOf="@+id/iv_gallery"
             android:scaleType="center"
             android:src="@drawable/ic_format_bold_black_24dp"
@@ -69,8 +68,8 @@
 
         <ImageView
             android:id="@+id/ic_location"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_toRightOf="@+id/iv_textBold"
             android:scaleType="center"
             android:src="@drawable/ic_location_on_black_24dp"
@@ -78,8 +77,8 @@
 
         <ImageView
             android:id="@+id/ic_link"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_toRightOf="@+id/ic_location"
             android:scaleType="center"
             android:src="@drawable/ic_link_black_24dp"
@@ -87,8 +86,8 @@
 
         <ImageView
             android:id="@+id/ic_makePoll"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_toRightOf="@+id/ic_link"
             android:scaleType="center"
             android:src="@drawable/ic_format_list_bulleted_black_24dp"
@@ -98,7 +97,7 @@
         <Button
             style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_gravity="end"
             android:text="SHOUT" />
