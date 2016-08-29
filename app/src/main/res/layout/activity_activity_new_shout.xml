@@ -3,15 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="10dp"
+
     tools:context="com.app.oponion.ActivityNewShout">
 
 
     <RelativeLayout
         android:id="@+id/rv_topBar"
         android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -43,11 +44,9 @@
     <RelativeLayout
         android:id="@+id/rv_bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="2dp"
-        android:gravity="center"
-        android:padding="5dp">
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/iv_gallery"
@@ -93,6 +92,15 @@
             android:src="@drawable/ic_format_list_bulleted_black_24dp"
             android:tint="@color/darkGrey" />
 
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/ic_makePoll"
+            android:textSize="18sp"
+            android:textColor="@color/darkGrey"
+            android:text="Ad"/>
+
 
         <Button
             style="@style/Base.Widget.AppCompat.Button.Colored"
@@ -110,13 +118,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/rv_bottomBar"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
         android:layout_below="@id/rv_topBar">
 
         <EditText
+            android:id="@+id/tv_feedBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="shout out loud!"
             android:textSize="16sp" />
+
+        <ImageView
+            android:layout_below="@+id/tv_feedBody"
+            android:id="@+id/iv_selectedImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"/>
 
     </RelativeLayout>
 

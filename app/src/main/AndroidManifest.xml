@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".Oponion"
         android:allowBackup="true"
@@ -23,8 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityNewShout"
-            android:windowSoftInputMode=""></activity>
+        <activity
+            android:name=".ActivityNewShout"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".UserProfileActivity"></activity>
     </application>
 
 </manifest>
