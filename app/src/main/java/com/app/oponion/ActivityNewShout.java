@@ -29,7 +29,9 @@ public class ActivityNewShout extends AppCompatActivity {
 
     private String userChoosenTask;
 
-    private ImageView ivSelectedImage;
+    private ImageView ivSelectedImage, icLocation;
+
+    private static final int MAP_ACTIVITY = 1212;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,16 @@ public class ActivityNewShout extends AppCompatActivity {
             }
         });
 
-        ivSelectedImage=(ImageView) findViewById(R.id.iv_selectedImage);
+        ivSelectedImage = (ImageView) findViewById(R.id.iv_selectedImage);
+
+        findViewById(R.id.iv_location).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivityForResult(new Intent(ActivityNewShout.this, MapsActivity.class), MAP_ACTIVITY);
+
+            }
+        });
 
     }
 
@@ -59,10 +70,14 @@ public class ActivityNewShout extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
+            if (requestCode == SELECT_FILE) {
                 onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
+            } else if (requestCode == REQUEST_CAMERA) {
                 onCaptureImageResult(data);
+            } else if (requestCode == MAP_ACTIVITY) {
+
+            }
+
         }
     }
 

@@ -66,7 +66,7 @@
             android:tint="@color/darkGrey" />
 
         <ImageView
-            android:id="@+id/ic_location"
+            android:id="@+id/iv_location"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_toRightOf="@+id/iv_textBold"
@@ -78,7 +78,7 @@
             android:id="@+id/ic_link"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_toRightOf="@+id/ic_location"
+            android:layout_toRightOf="@+id/iv_location"
             android:scaleType="center"
             android:src="@drawable/ic_link_black_24dp"
             android:tint="@color/darkGrey" />
@@ -127,6 +127,7 @@
             android:id="@+id/tv_feedBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textWebEditText"
             android:hint="shout out loud!"
             android:textSize="16sp" />
 
