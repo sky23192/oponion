@@ -12,6 +12,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:name=".Oponion"
@@ -32,6 +33,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".GeocodeAddressIntentService"
+            android:exported="false">
+        </service>
         <activity
             android:name=".ActivityNewShout"
             android:windowSoftInputMode="adjustResize" />

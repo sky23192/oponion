@@ -10,10 +10,10 @@
     <RelativeLayout
         android:id="@+id/rv_topBar"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:layout_height="wrap_content">
+        android:paddingTop="10dp">
 
         <ImageView
             android:id="@+id/iv_close"
@@ -95,11 +95,11 @@
         <TextView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:gravity="center"
             android:layout_toRightOf="@+id/ic_makePoll"
-            android:textSize="18sp"
+            android:gravity="center"
+            android:text="Ad"
             android:textColor="@color/darkGrey"
-            android:text="Ad"/>
+            android:textSize="18sp" />
 
 
         <Button
@@ -118,26 +118,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/rv_bottomBar"
+        android:layout_below="@id/rv_topBar"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:layout_below="@id/rv_topBar">
+        android:paddingTop="10dp">
+
+        <LinearLayout
+            android:id="@+id/ll_stamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:drawablePadding="4dp"
+                android:drawableLeft="@drawable/ic_location_on_black_18dp"
+                android:gravity="center_vertical"
+                android:text="location" />
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/tv_feedBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textWebEditText"
+            android:layout_below="@+id/ll_stamp"
             android:hint="shout out loud!"
+            android:inputType="textWebEditText"
+            android:textSize="16sp" />
+
+        <EditText
+            android:layout_below="@+id/tv_feedBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textWebEditText"
             android:textSize="16sp" />
 
         <ImageView
-            android:layout_below="@+id/tv_feedBody"
             android:id="@+id/iv_selectedImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"/>
+            android:layout_below="@+id/tv_feedBody"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
 
     </RelativeLayout>
 

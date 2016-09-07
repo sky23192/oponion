@@ -26,9 +26,9 @@
     <color name="background_color">#B0BEC5</color>
 
     <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#60379e</color>
-    <color name="colorAccent">#60379e</color>
-    <color name="splashBackground">#60379e</color>
+    <color name="colorPrimaryDark">#5949a3</color>
+    <color name="colorAccent">#5949a3</color>
+    <color name="splashBackground">#5949a3</color>
     <color name="darkGrey">#d4d1d1</color>
 
 </resources>

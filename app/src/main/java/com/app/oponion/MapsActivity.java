@@ -1,7 +1,10 @@
 package com.app.oponion;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -13,6 +16,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
+
+    public static final String TAG = Oponion.APP_TAG + MapsActivity.class.getSimpleName();
 
     private GoogleMap mMap;
 
@@ -54,4 +59,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         marker = mMap.addMarker(new MarkerOptions().position(latLng));
 
     }
+
+    @Override
+    public void finish() {
+        Intent returnIntent = new Intent();
+        if (marker != null) {
+            Log.i(TAG, "onBackPressed: SENDING RESULT BACK");
+            returnIntent.putExtra("lat", marker.getPosition().latitude);
+            returnIntent.putExtra("lng", marker.getPosition().longitude);
+            setResult(RESULT_OK, returnIntent);
+        }
+        super.finish();
+    }
+
 }
