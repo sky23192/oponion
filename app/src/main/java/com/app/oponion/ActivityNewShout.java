@@ -1,7 +1,10 @@
 package com.app.oponion;
 
+import android.*;
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LevelListDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
@@ -19,13 +23,17 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -37,11 +45,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import firebasemodels.Feed;
+import gun0912.tedbottompicker.TedBottomPicker;
 
-public class ActivityNewShout extends AppCompatActivity implements View.OnClickListener {
+public class ActivityNewShout extends AppCompatActivity implements View.OnClickListener
+{
 
 
     private static final String TAG = Oponion.APP_TAG + ActivityNewShout.class.getSimpleName();
@@ -60,29 +71,64 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
     EditText etBody;
 
+    TedBottomPicker tedBottomPicker;
+
+    final PermissionListener permissionListener = new PermissionListener()
+    {
+        @Override
+        public void onPermissionGranted()
+        {
+
+            tedBottomPicker = new TedBottomPicker.Builder(ActivityNewShout.this)
+                    .setOnImageSelectedListener(new TedBottomPicker.OnImageSelectedListener() {
+                        @Override
+                        public void onImageSelected(Uri uri) {
+
+                        }
+                    })
+                    .create();
+
+
+        }
+
+        @Override
+        public void onPermissionDenied(ArrayList<String> deniedPermissions)
+        {
+
+        }
+    };
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_new_shout);
 
-        findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 finish();
             }
         });
 
-        findViewById(R.id.iv_gallery).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_gallery).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                selectImage();
+            public void onClick(View v)
+            {
+                tedBottomPicker.show(getSupportFragmentManager());
+                //selectImage();
             }
         });
 
-        findViewById(R.id.btn_postFeed).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_postFeed).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                Feed.postFeed("9409210488","23.0225,72.5714","cover image url","Title goes here",
+            public void onClick(View v)
+            {
+                Feed.postFeed("9409210488", "23.0225,72.5714", "cover image url", "Title goes here",
                         "<h2>Title</h2><br><p>Description here</p><img src='https://pbs.twimg.com/profile_images/762369348300251136/5Obhonwa.jpg'/>");
             }
         });
@@ -90,11 +136,13 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
         etBody = (EditText) findViewById(R.id.tv_feedBody);
 
-        Html.ImageGetter imageGetter = new Html.ImageGetter() {
+        Html.ImageGetter imageGetter = new Html.ImageGetter()
+        {
             Drawable d = null;
 
             @Override
-            public Drawable getDrawable(final String source) {
+            public Drawable getDrawable(final String source)
+            {
 
                 LevelListDrawable d = new LevelListDrawable();
                 Drawable empty = getResources().getDrawable(R.drawable.icon);
@@ -131,18 +179,24 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
         startService(intent);
 
+        checkForPermission();
+
+
+
     }
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         Log.i(TAG, "onActivityResult: ON ACTIVITY RESULT");
 
         Log.i(TAG, "onActivityResult: RESULT CODE IS OK!!!");
 
         Log.i(TAG, "onActivityResult: REQUEST CODE IS: " + resultCode);
 
-        switch (requestCode) {
+        switch (requestCode)
+        {
             case SELECT_FILE:
                 onSelectFromGalleryResult(data);
                 break;
@@ -152,14 +206,16 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                 break;
 
             case REQUEST_LOCATION:
-                if (data != null) {
+                if (data != null)
+                {
                     Intent intent = new Intent(this, GeocodeAddressIntentService.class);
                     intent.putExtra(Constants.RECEIVER, mResultReceiver);
                     intent.putExtra(Constants.FETCH_TYPE_EXTRA, Constants.USE_ADDRESS_LOCATION);
 
                     intent.putExtra(Constants.LOCATION_LATITUDE_DATA_EXTRA, data.getDoubleExtra("lat", 0));
                     intent.putExtra(Constants.LOCATION_LONGITUDE_DATA_EXTRA, data.getDoubleExtra("lng", 0));
-                } else {
+                } else
+                {
                     Log.i(TAG, "onActivityResult: DATA is NULL!!!!!");
                 }
                 break;
@@ -175,12 +231,16 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
 
     @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data) {
+    private void onSelectFromGalleryResult(Intent data)
+    {
         Bitmap bm = null;
-        if (data != null) {
-            try {
+        if (data != null)
+        {
+            try
+            {
                 bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 e.printStackTrace();
             }
         }
@@ -188,21 +248,25 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void onCaptureImageResult(Intent data) {
+    private void onCaptureImageResult(Intent data)
+    {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         File destination = new File(Environment.getExternalStorageDirectory(),
                 System.currentTimeMillis() + ".jpg");
         FileOutputStream fo;
-        try {
+        try
+        {
             destination.createNewFile();
             fo = new FileOutputStream(destination);
             fo.write(bytes.toByteArray());
             fo.close();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e)
+        {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
         ivSelectedImage.setImageBitmap(thumbnail);
@@ -210,15 +274,22 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+        switch (requestCode)
+        {
             case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
                     if (userChosenTask.equals("Take Photo"))
+                    {
                         cameraIntent();
-                    else if (userChosenTask.equals("Choose from Library"))
+                    } else if (userChosenTask.equals("Choose from Library"))
+                    {
                         galleryIntent();
-                } else {
+                    }
+                } else
+                {
                     //code for deny
                 }
                 break;
@@ -226,25 +297,35 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void selectImage() {
+    private void selectImage()
+    {
         final CharSequence[] items = {"Take Photo", "Choose from Library",
                 "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add Photo!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
+        builder.setItems(items, new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int item) {
+            public void onClick(DialogInterface dialog, int item)
+            {
                 boolean result = Utility.checkPermission(ActivityNewShout.this);
 
-                if (items[item].equals("Take Photo")) {
+                if (items[item].equals("Take Photo"))
+                {
                     userChosenTask = "Take Photo";
                     if (result)
+                    {
                         cameraIntent();
-                } else if (items[item].equals("Choose from Library")) {
+                    }
+                } else if (items[item].equals("Choose from Library"))
+                {
                     userChosenTask = "Choose from Library";
                     if (result)
+                    {
                         galleryIntent();
-                } else if (items[item].equals("Cancel")) {
+                    }
+                } else if (items[item].equals("Cancel"))
+                {
                     dialog.dismiss();
                 }
             }
@@ -253,12 +334,14 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void cameraIntent() {
+    private void cameraIntent()
+    {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CAMERA);
     }
 
-    private void galleryIntent() {
+    private void galleryIntent()
+    {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);//
@@ -266,35 +349,45 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         Intent i = new Intent(ActivityNewShout.this, MapsActivity.class);
         Log.i(TAG, "onClick: REQUEST_LOCATION CODE IS: " + REQUEST_LOCATION);
         startActivityForResult(i, REQUEST_LOCATION);
     }
 
     @SuppressLint("ParcelCreator")
-    class AddressResultReceiver extends ResultReceiver {
-        public AddressResultReceiver(Handler handler) {
+    class AddressResultReceiver extends ResultReceiver
+    {
+        public AddressResultReceiver(Handler handler)
+        {
             super(handler);
         }
 
         @Override
-        protected void onReceiveResult(int resultCode, final Bundle resultData) {
-            if (resultCode == Constants.SUCCESS_RESULT) {
+        protected void onReceiveResult(int resultCode, final Bundle resultData)
+        {
+            if (resultCode == Constants.SUCCESS_RESULT)
+            {
                 //final Address address = resultData.getParcelable(Constants.RESULT_ADDRESS);
-                runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable()
+                {
                     @Override
-                    public void run() {
+                    public void run()
+                    {
                         String address = resultData.getString(Constants.RESULT_DATA_KEY);
                         address = address.substring(0, address.lastIndexOf(" "));
                         tvLocation.setText(address);
                         tvLocation.setVisibility(View.VISIBLE);
                     }
                 });
-            } else {
-                runOnUiThread(new Runnable() {
+            } else
+            {
+                runOnUiThread(new Runnable()
+                {
                     @Override
-                    public void run() {
+                    public void run()
+                    {
 
                     }
                 });
@@ -303,33 +396,41 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
 
-    class LoadImage extends AsyncTask<Object, Void, Bitmap> {
+    class LoadImage extends AsyncTask<Object, Void, Bitmap>
+    {
 
         private LevelListDrawable mDrawable;
 
         @Override
-        protected Bitmap doInBackground(Object... params) {
+        protected Bitmap doInBackground(Object... params)
+        {
             String source = (String) params[0];
             mDrawable = (LevelListDrawable) params[1];
             Log.d(TAG, "doInBackground " + source);
-            try {
+            try
+            {
                 InputStream is = new URL(source).openStream();
                 return BitmapFactory.decodeStream(is);
-            } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException e)
+            {
                 e.printStackTrace();
-            } catch (MalformedURLException e) {
+            } catch (MalformedURLException e)
+            {
                 e.printStackTrace();
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 e.printStackTrace();
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(Bitmap bitmap) {
+        protected void onPostExecute(Bitmap bitmap)
+        {
             Log.d(TAG, "onPostExecute drawable " + mDrawable);
             Log.d(TAG, "onPostExecute bitmap " + bitmap);
-            if (bitmap != null) {
+            if (bitmap != null)
+            {
                 BitmapDrawable d = new BitmapDrawable(bitmap);
                 mDrawable.addLevel(1, 1, d);
                 mDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
@@ -341,5 +442,16 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
             }
         }
     }
+
+
+    void checkForPermission()
+    {
+        new TedPermission(this)
+                .setPermissionListener(permissionListener)
+                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .check();
+    }
+
 
 }
