@@ -39,6 +39,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Calendar;
 
+import firebasemodels.Feed;
+
 public class ActivityNewShout extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -47,8 +49,6 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     private static final int SELECT_FILE = 1234;
 
     private String userChosenTask;
-
-    final Handler mHandler=new Handler();
 
     private ImageView ivSelectedImage, ivLocation;
 
@@ -79,10 +79,19 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
             }
         });
 
+        findViewById(R.id.btn_postFeed).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Feed.postFeed("9409210488","23.0225,72.5714","cover image url","Title goes here",
+                        "<h2>Title</h2><br><p>Description here</p><img src='https://pbs.twimg.com/profile_images/762369348300251136/5Obhonwa.jpg'/>");
+            }
+        });
+
+
         etBody = (EditText) findViewById(R.id.tv_feedBody);
 
         Html.ImageGetter imageGetter = new Html.ImageGetter() {
-            Drawable d=null;
+            Drawable d = null;
 
             @Override
             public Drawable getDrawable(final String source) {
