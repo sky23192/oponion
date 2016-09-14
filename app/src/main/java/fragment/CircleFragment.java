@@ -1,8 +1,10 @@
 package fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.app.oponion.ActivityNewShout;
 import com.app.oponion.R;
 
 import java.util.ArrayList;
@@ -38,6 +41,8 @@ public class CircleFragment extends Fragment {
 
     CircleFeedAdapter adapter;
 
+    FloatingActionButton fabNewShout;
+
     private int count = -1;
 
     public CircleFragment() {
@@ -57,6 +62,17 @@ public class CircleFragment extends Fragment {
         View view = inflater.inflate(R.layout.circle_fragment, container, false);
 
         rvCircleFeeds = (RecyclerView) view.findViewById(R.id.rv_circleFeeds);
+
+        rvCircleFeeds.setNestedScrollingEnabled(false);
+
+        fabNewShout = (FloatingActionButton) view.findViewById(R.id.fab_newShout);
+
+        fabNewShout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ActivityNewShout.class));
+            }
+        });
 
         rvCircleFeeds.setLayoutManager(new LinearLayoutManager(context));
 
@@ -123,7 +139,7 @@ public class CircleFragment extends Fragment {
             pollOptionList.add(new SinglePollOption("2", "iphone", "10"));
             pollOptionList.add(new SinglePollOption("3", "oppo", "10"));
 
-            PollFeed pf1 = new PollFeed("https://lh3.googleusercontent.com/-FffqJSvWgoM/AAAAAAAAAAI/AAAAAAAAAFc/O-PfLgisbgQ/s120-c/photo.jpg",
+            PollFeed pf1 = new PollFeed("https://lh3.googleusercontent.com/-8twv_aWLqtY/AAAAAAAAAAI/AAAAAAAAAQ8/K1r--rxdH3w/s120-c/photo.jpg",
                     "Rutvik Mehta",
                     "which is the best phone?",
                     pollOptionList,

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
   ~ ProgressViews
   ~ Copyright (c) 2015  Natasa Misic
@@ -25,8 +26,9 @@
     <color name="background_color">#B0BEC5</color>
 
     <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="splashBackground">#60379e</color>
+    <color name="colorPrimaryDark">#5949a3</color>
+    <color name="colorAccent">#5949a3</color>
+    <color name="splashBackground">#5949a3</color>
+    <color name="darkGrey">#d4d1d1</color>
 
 </resources>
