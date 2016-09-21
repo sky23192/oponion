@@ -64,31 +64,38 @@ public class SpotlightFragment extends Fragment
 
         rvSpotlightFeeds.setAdapter(adapter);
 
-        Feed.getFeeds(new Feed.FeedListener() {
-            @Override
-            public void onGetFeed(Map<String, Object> feedMap) {
+        try {
+            Feed.getFeeds(new Feed.FeedListener() {
+                @Override
+                public void onGetFeed(Map<String, Object> feedMap) {
 
-                adapter.spotlightFeedList.clear();
+                    adapter.spotlightFeedList.clear();
 
-                adapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
 
-                List<String> tags = new ArrayList<>();
-                tags.add("@rutvik ");
-                tags.add("@umang ");
-                tags.add("@abbas ");
+                    List<String> tags = new ArrayList<>();
+                    tags.add("@rutvik ");
+                    tags.add("@umang ");
+                    tags.add("@abbas ");
 
-                Iterator<Object> iterator = feedMap.values().iterator();
+                    if(feedMap!=null) {
 
-                while (iterator.hasNext()) {
-                    Map<String, String> singleFeed = (Map<String, String>) iterator.next();
-                    adapter.addSpotlightFeed(new SpotlightFeed(singleFeed.get("title"),
-                            "http://icons.iconarchive.com/icons/custom-icon-design/round-world-flags/256/India-icon.png",
-                            "http://img-9gag-fun.9cache.com/photo/aj68AER_700b.jpg",
-                            835));
+                        Iterator<Object> iterator = feedMap.values().iterator();
+
+                        while (iterator.hasNext()) {
+                            Map<String, String> singleFeed = (Map<String, String>) iterator.next();
+                            adapter.addSpotlightFeed(new SpotlightFeed(singleFeed.get("title"),
+                                    "http://icons.iconarchive.com/icons/custom-icon-design/round-world-flags/256/India-icon.png",
+                                    "http://img-9gag-fun.9cache.com/photo/aj68AER_700b.jpg",
+                                    835));
+                        }
+                    }
+
                 }
-
-            }
-        });
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         for(int i=11;i<=10;i++)
         {

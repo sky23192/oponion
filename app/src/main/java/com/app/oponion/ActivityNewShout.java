@@ -5,6 +5,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -101,6 +102,9 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
     private ProgressBar pbProcessing;
 
+    boolean gps_enabled = false;
+    boolean network_enabled = false;
+
     private final android.location.LocationListener mLocationListener = new android.location.LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
@@ -174,15 +178,41 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                 return;
             }
 
+            LocationManager lm = (LocationManager) ActivityNewShout.this
+                    .getSystemService(Context.LOCATION_SERVICE);
 
-            Criteria criteria = new Criteria();
-            final String provider = mLocationManager.getBestProvider(criteria, false);
-            Location location = mLocationManager.getLastKnownLocation(provider);
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+            Location net_loc = null, gps_loc = null, finalLoc = null;
+
+            if (gps_enabled)
+                gps_loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (network_enabled)
+                net_loc = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            if (gps_loc != null && net_loc != null) {
+
+                if (gps_loc.getAccuracy() >= net_loc.getAccuracy())
+                    finalLoc = gps_loc;
+                else
+                    finalLoc = net_loc;
+
+                // I used this just to get an idea (if both avail, its upto you which you want to take as I taken location with more accuracy)
+
+            } else {
+
+                if (gps_loc != null) {
+                    finalLoc = net_loc;
+                } else if (net_loc != null) {
+                    finalLoc = gps_loc;
+                }
+            }
 
             // Initialize the location fields
-            if (location != null) {
-                positionLocation = location;
-                long daysOld = (System.currentTimeMillis() - location.getTime()) / DAY_IN_MILLISECONDS;
+            if (finalLoc != null) {
+                positionLocation = finalLoc;
+                long daysOld = (System.currentTimeMillis() - finalLoc.getTime()) / DAY_IN_MILLISECONDS;
                 if (daysOld <= 1) {
                     Toast.makeText(ActivityNewShout.this, "" + daysOld, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ActivityNewShout.this, GeocodeAddressIntentService.class);
@@ -190,16 +220,16 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                     intent.putExtra(Constants.FETCH_TYPE_EXTRA, Constants.USE_ADDRESS_LOCATION);
 
                     intent.putExtra(Constants.LOCATION_LATITUDE_DATA_EXTRA,
-                            location.getLatitude());
+                            finalLoc.getLatitude());
                     intent.putExtra(Constants.LOCATION_LONGITUDE_DATA_EXTRA,
-                            location.getLongitude());
+                            finalLoc.getLongitude());
 
                     startService(intent);
                 } else {
-                    mLocationManager.requestLocationUpdates(provider, 0, 0, mLocationListener);
+                    mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
                 }
             } else {
-                mLocationManager.requestLocationUpdates(provider, 0, 0, mLocationListener);
+                mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
             }
 
         }
@@ -251,7 +281,11 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                 post.setVisibility(View.GONE);
                 pbProcessing.setVisibility(View.VISIBLE);
 
-                final String location = positionLocation.getLatitude() + "," + positionLocation.getLongitude();
+                String location = "0,0";
+
+                if (positionLocation != null) {
+                    location = positionLocation.getLatitude() + "," + positionLocation.getLongitude();
+                }
                 final String title = etTitle.getText().toString();
                 final String body = etBody.getText().toString();
 
