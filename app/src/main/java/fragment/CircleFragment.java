@@ -17,11 +17,14 @@ import com.app.oponion.ActivityNewShout;
 import com.app.oponion.R;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import adapter.CircleFeedAdapter;
 import adapter.SpotlightFeedsAdapter;
+import firebasemodels.Feed;
 import model.CircleSimpleFeed;
 import model.PollFeed;
 import model.SinglePollOption;
@@ -57,7 +60,7 @@ public class CircleFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.circle_fragment, container, false);
 
@@ -81,6 +84,8 @@ public class CircleFragment extends Fragment {
         adapter = new CircleFeedAdapter(context);
 
         rvCircleFeeds.setAdapter(adapter);
+
+
 
         setupAdapterData();
 

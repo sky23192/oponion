@@ -14,7 +14,14 @@ import android.view.ViewGroup;
 
 import com.app.oponion.R;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import adapter.SpotlightFeedsAdapter;
+import firebasemodels.Feed;
+import model.CircleSimpleFeed;
 import model.SpotlightFeed;
 
 /**
@@ -57,7 +64,33 @@ public class SpotlightFragment extends Fragment
 
         rvSpotlightFeeds.setAdapter(adapter);
 
-        for(int i=0;i<=10;i++)
+        Feed.getFeeds(new Feed.FeedListener() {
+            @Override
+            public void onGetFeed(Map<String, Object> feedMap) {
+
+                adapter.spotlightFeedList.clear();
+
+                adapter.notifyDataSetChanged();
+
+                List<String> tags = new ArrayList<>();
+                tags.add("@rutvik ");
+                tags.add("@umang ");
+                tags.add("@abbas ");
+
+                Iterator<Object> iterator = feedMap.values().iterator();
+
+                while (iterator.hasNext()) {
+                    Map<String, String> singleFeed = (Map<String, String>) iterator.next();
+                    adapter.addSpotlightFeed(new SpotlightFeed(singleFeed.get("title"),
+                            "http://icons.iconarchive.com/icons/custom-icon-design/round-world-flags/256/India-icon.png",
+                            "http://img-9gag-fun.9cache.com/photo/aj68AER_700b.jpg",
+                            835));
+                }
+
+            }
+        });
+
+        for(int i=11;i<=10;i++)
         {
 
             adapter.addSpotlightFeed(new SpotlightFeed("Indian PM Narendra Modi",
