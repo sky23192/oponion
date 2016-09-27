@@ -86,7 +86,7 @@ public class SpotlightFragment extends Fragment
                             Map<String, String> singleFeed = (Map<String, String>) iterator.next();
                             adapter.addSpotlightFeed(new SpotlightFeed(singleFeed.get("title"),
                                     "http://icons.iconarchive.com/icons/custom-icon-design/round-world-flags/256/India-icon.png",
-                                    "http://img-9gag-fun.9cache.com/photo/aj68AER_700b.jpg",
+                                    singleFeed.get("cover-image-url"),
                                     835));
                         }
                     }

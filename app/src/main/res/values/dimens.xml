@@ -10,4 +10,8 @@
     <!-- GENERAL -->
     <dimen name="default_stroke_width">7dp</dimen>
     <dimen name="default_background_stroke_width">3dp</dimen>
+
+    <dimen name="tabsHeight">48dp</dimen>
+    <dimen name="fab_margin">0dp</dimen>
+
 </resources>

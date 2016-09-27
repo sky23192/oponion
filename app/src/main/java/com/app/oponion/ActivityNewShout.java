@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.os.ResultReceiver;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -62,6 +63,13 @@ import java.util.Calendar;
 
 import firebasemodels.Feed;
 import gun0912.tedbottompicker.TedBottomPicker;
+import imgur.DocumentHelper;
+import imgur.ImageResponse;
+import imgur.Upload;
+import imgur.UploadService;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class ActivityNewShout extends AppCompatActivity implements View.OnClickListener {
 
@@ -104,6 +112,12 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
     boolean gps_enabled = false;
     boolean network_enabled = false;
+
+    private File chosenFile;
+
+    private Upload upload;
+
+    private ImageResponse imageResponse;
 
     private final android.location.LocationListener mLocationListener = new android.location.LocationListener() {
         @Override
@@ -161,9 +175,12 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onImageSelected(Uri uri) {
                             if (isAddingCoverPhoto) {
+                                String filePath = DocumentHelper.getPath(ActivityNewShout.this, uri);
+                                chosenFile = new File(filePath);
                                 Picasso.with(ActivityNewShout.this).load(uri).into(ivCoverPhoto);
                                 llCoverPhoto.setVisibility(View.GONE);
                                 isAddingCoverPhoto = false;
+                                uploadImage();
                             }
                         }
                     })
@@ -240,6 +257,29 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
         }
     };
 
+
+    public void uploadImage() {
+    /*
+      Create the @Upload object
+     */
+        if (chosenFile == null) return;
+        createUpload(chosenFile);
+
+    /*
+      Start upload
+     */
+        new UploadService(this).Execute(upload, new UiCallback());
+    }
+
+    private void createUpload(File image) {
+        upload = new Upload();
+
+        upload.image = image;
+        upload.title = "oponion";
+        upload.description = "oponion this is a test image";
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -289,7 +329,7 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                 final String title = etTitle.getText().toString();
                 final String body = etBody.getText().toString();
 
-                Feed.postFeed("9409210488", location, "cover image url", title, body, new Feed.PostFeedListener() {
+                Feed.postFeed("9409210488", location, imageResponse.data.link, title, body, new Feed.PostFeedListener() {
                     @Override
                     public void onPostSuccess() {
                         post.setVisibility(View.VISIBLE);
@@ -601,5 +641,22 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                 .check();
     }
 
+
+    private class UiCallback implements Callback<ImageResponse> {
+
+        @Override
+        public void success(ImageResponse imageResponse, Response response) {
+            Log.i(TAG, imageResponse.toString());
+            ActivityNewShout.this.imageResponse = imageResponse;
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+            //Assume we have no connection, since error is null
+            if (error == null) {
+                //Snackbar.make(findViewById(R.id.rootView), "No internet connection", Snackbar.LENGTH_SHORT).show();
+            }
+        }
+    }
 
 }
