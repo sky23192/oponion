@@ -101,71 +101,140 @@
             android:textColor="@color/darkGrey"
             android:textSize="18sp" />
 
-
-        <Button
-            android:id="@+id/btn_postFeed"
-            style="@style/Base.Widget.AppCompat.Button.Colored"
+        <FrameLayout
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="end"
-            android:text="SHOUT" />
+            android:layout_alignParentRight="true">
+
+            <Button
+                android:id="@+id/btn_postFeed"
+                style="@style/Base.Widget.AppCompat.Button.Colored"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:text="SHOUT"
+                android:visibility="visible" />
+
+            <ProgressBar
+                android:id="@+id/pb_processing"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="gone" />
+
+        </FrameLayout>
 
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rv_contentBody"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/rv_bottomBar"
-        android:layout_below="@id/rv_topBar"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp">
+        android:layout_below="@id/rv_topBar">
 
-        <LinearLayout
-            android:id="@+id/ll_stamp"
+        <RelativeLayout
+            android:id="@+id/rv_contentBody"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp">
 
-            <TextView
-                android:id="@+id/tv_location"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/ll_stamp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:drawableLeft="@drawable/ic_location_on_black_18dp"
-                android:drawablePadding="4dp"
-                android:gravity="center_vertical"
-                android:text="location" />
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:drawableLeft="@drawable/ic_location_on_black_18dp"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical"
+                    android:text="Fetching location" />
 
-        <EditText
-            android:id="@+id/tv_feedBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_stamp"
-            android:hint="shout out loud!"
-            android:inputType="textWebEditText"
-            android:textSize="16sp" />
+                <FrameLayout
+                    android:id="@+id/fl_coverPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:minHeight="150dp">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_feedBody"
-            android:inputType="textWebEditText"
-            android:textSize="16sp" />
+                    <ImageView
+                        android:id="@+id/iv_coverPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop" />
 
-        <ImageView
-            android:id="@+id/iv_selectedImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_feedBody"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop" />
+                    <LinearLayout
+                        android:id="@+id/ll_coverPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dotted_border"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-    </RelativeLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_linked_camera_black_48dp"
+                            android:tint="@color/darkGrey" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:text="Cover Photo"
+                            android:textColor="@color/darkGrey" />
+                    </LinearLayout>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_feedTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_stamp"
+                android:layout_marginBottom="8dp"
+                android:hint="title"
+                android:inputType="textWebEditText"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/tv_feedBody"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/et_feedTitle"
+                android:background="@android:color/transparent"
+                android:hint="shout out loud"
+                android:inputType="textCapSentences|textMultiLine"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_selectedImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_feedBody"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 
 </RelativeLayout>

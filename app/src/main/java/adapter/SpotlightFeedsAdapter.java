@@ -24,7 +24,7 @@ public class SpotlightFeedsAdapter extends RecyclerView.Adapter
 
     Context context;
 
-    List<SpotlightFeed> spotlightFeedList=new LinkedList<>();
+    public List<SpotlightFeed> spotlightFeedList=new LinkedList<>();
 
     public SpotlightFeedsAdapter(Context context){
         this.context=context;

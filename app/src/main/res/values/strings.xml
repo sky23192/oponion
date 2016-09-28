@@ -8,4 +8,10 @@
     <string name="progress">progress</string>
     <string name="title_activity_maps">Map</string>
 
+
+    <string name="notification_fail">Image failed to upload...</string>
+    <string name="notification_share_link">Share link</string>
+    <string name="notifaction_success">Successfully uploaded</string>
+    <string name="notification_progress">Uploading image...</string>
+
 </resources>

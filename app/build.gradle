@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
     defaultConfig {
         applicationId "com.app.oponion"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -38,6 +38,8 @@ dependencies {
     compile 'com.github.clans:fab:1.6.4'
     compile 'gun0912.ted:tedpermission:1.0.0'
     compile 'gun0912.ted:tedbottompicker:1.0.3'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

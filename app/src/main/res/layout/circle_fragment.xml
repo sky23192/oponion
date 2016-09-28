@@ -30,11 +30,11 @@
         android:layout_marginBottom="12dp"
         android:layout_marginRight="16dp"
         android:src="@drawable/ic_shout"
+        app:fabSize="mini"
         app:fab_colorNormal="@color/colorPrimaryDark"
         app:fab_colorPressed="#877bbf"
         app:fab_elevationCompat="4dp"
-        app:fabSize="mini"
-        app:layout_behavior="com.app.oponion.FAB_Float_on_Scroll" />
+        app:layout_behavior="com.app.oponion.ScrollingFABBehavior" />
 
 
 </android.support.design.widget.CoordinatorLayout>
