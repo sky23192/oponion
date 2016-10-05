@@ -85,8 +85,6 @@ public class CircleFragment extends Fragment {
 
         rvCircleFeeds.setAdapter(adapter);
 
-
-
         setupAdapterData();
 
         return view;

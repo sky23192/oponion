@@ -37,13 +37,15 @@ public class SpotlightFragment extends Fragment
 
     SpotlightFeedsAdapter adapter;
 
-    public SpotlightFragment(){
+    public SpotlightFragment()
+    {
 
     }
 
-    public static SpotlightFragment getInstance(Context context){
-        SpotlightFragment fragment=new SpotlightFragment();
-        fragment.context=context;
+    public static SpotlightFragment getInstance(Context context)
+    {
+        SpotlightFragment fragment = new SpotlightFragment();
+        fragment.context = context;
         return fragment;
     }
 
@@ -52,22 +54,32 @@ public class SpotlightFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View view=inflater.inflate(R.layout.spotlight_fragment,container,false);
+        View view = inflater.inflate(R.layout.spotlight_fragment, container, false);
 
-        rvSpotlightFeeds=(RecyclerView) view.findViewById(R.id.rv_spotlightFeeds);
+        rvSpotlightFeeds = (RecyclerView) view.findViewById(R.id.rv_spotlightFeeds);
 
-        rvSpotlightFeeds.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        final StaggeredGridLayoutManager sgm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+
+        sgm.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
+
+        rvSpotlightFeeds.setLayoutManager(sgm);
 
         rvSpotlightFeeds.setHasFixedSize(true);
+        rvSpotlightFeeds.setItemViewCacheSize(20);
+        rvSpotlightFeeds.setDrawingCacheEnabled(true);
+        rvSpotlightFeeds.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
 
-        adapter=new SpotlightFeedsAdapter(context);
+        adapter = new SpotlightFeedsAdapter(context);
 
         rvSpotlightFeeds.setAdapter(adapter);
 
-        try {
-            Feed.getFeeds(new Feed.FeedListener() {
+        try
+        {
+            Feed.getFeeds(new Feed.FeedListener()
+            {
                 @Override
-                public void onGetFeed(Map<String, Object> feedMap) {
+                public void onGetFeed(Map<String, Object> feedMap)
+                {
 
                     adapter.spotlightFeedList.clear();
 
@@ -78,11 +90,13 @@ public class SpotlightFragment extends Fragment
                     tags.add("@umang ");
                     tags.add("@abbas ");
 
-                    if(feedMap!=null) {
+                    if (feedMap != null)
+                    {
 
                         Iterator<Object> iterator = feedMap.values().iterator();
 
-                        while (iterator.hasNext()) {
+                        while (iterator.hasNext())
+                        {
                             Map<String, String> singleFeed = (Map<String, String>) iterator.next();
                             adapter.addSpotlightFeed(new SpotlightFeed(singleFeed.get("title"),
                                     "http://icons.iconarchive.com/icons/custom-icon-design/round-world-flags/256/India-icon.png",
@@ -93,11 +107,12 @@ public class SpotlightFragment extends Fragment
 
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
 
-        for(int i=11;i<=10;i++)
+        for (int i = 11; i <= 10; i++)
         {
 
             adapter.addSpotlightFeed(new SpotlightFeed("Indian PM Narendra Modi",

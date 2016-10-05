@@ -61,6 +61,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import extra.CircleTransform;
 import firebasemodels.Feed;
 import gun0912.tedbottompicker.TedBottomPicker;
 import imgur.DocumentHelper;
@@ -71,8 +72,8 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class ActivityNewShout extends AppCompatActivity implements View.OnClickListener {
-
+public class ActivityNewShout extends AppCompatActivity implements View.OnClickListener
+{
 
     private static final String TAG = Oponion.APP_TAG + ActivityNewShout.class.getSimpleName();
     private static final int REQUEST_CAMERA = 1212;
@@ -119,9 +120,13 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
     private ImageResponse imageResponse;
 
-    private final android.location.LocationListener mLocationListener = new android.location.LocationListener() {
+    private ImageView ivUserProfilePic;
+
+    private final android.location.LocationListener mLocationListener = new android.location.LocationListener()
+    {
         @Override
-        public void onLocationChanged(Location location) {
+        public void onLocationChanged(Location location)
+        {
 
             positionLocation = location;
 
@@ -136,7 +141,8 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
             startService(intent);
 
-            if (ActivityCompat.checkSelfPermission(ActivityNewShout.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ActivityNewShout.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(ActivityNewShout.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ActivityNewShout.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -151,30 +157,38 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
         }
 
         @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
+        public void onStatusChanged(String s, int i, Bundle bundle)
+        {
 
         }
 
         @Override
-        public void onProviderEnabled(String s) {
+        public void onProviderEnabled(String s)
+        {
 
         }
 
         @Override
-        public void onProviderDisabled(String s) {
+        public void onProviderDisabled(String s)
+        {
 
         }
     };
 
-    final PermissionListener permissionListener = new PermissionListener() {
+    final PermissionListener permissionListener = new PermissionListener()
+    {
         @Override
-        public void onPermissionGranted() {
+        public void onPermissionGranted()
+        {
 
             tedBottomPicker = new TedBottomPicker.Builder(ActivityNewShout.this)
-                    .setOnImageSelectedListener(new TedBottomPicker.OnImageSelectedListener() {
+                    .setOnImageSelectedListener(new TedBottomPicker.OnImageSelectedListener()
+                    {
                         @Override
-                        public void onImageSelected(Uri uri) {
-                            if (isAddingCoverPhoto) {
+                        public void onImageSelected(Uri uri)
+                        {
+                            if (isAddingCoverPhoto)
+                            {
                                 String filePath = DocumentHelper.getPath(ActivityNewShout.this, uri);
                                 chosenFile = new File(filePath);
                                 Picasso.with(ActivityNewShout.this).load(uri).into(ivCoverPhoto);
@@ -190,7 +204,8 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
             if (ActivityCompat.checkSelfPermission(ActivityNewShout.this,
                     Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(ActivityNewShout.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    && ActivityCompat.checkSelfPermission(ActivityNewShout.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
 
                 return;
             }
@@ -204,33 +219,46 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
             Location net_loc = null, gps_loc = null, finalLoc = null;
 
             if (gps_enabled)
+            {
                 gps_loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            }
             if (network_enabled)
+            {
                 net_loc = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            }
 
-            if (gps_loc != null && net_loc != null) {
+            if (gps_loc != null && net_loc != null)
+            {
 
                 if (gps_loc.getAccuracy() >= net_loc.getAccuracy())
+                {
                     finalLoc = gps_loc;
-                else
+                } else
+                {
                     finalLoc = net_loc;
+                }
 
                 // I used this just to get an idea (if both avail, its upto you which you want to take as I taken location with more accuracy)
 
-            } else {
+            } else
+            {
 
-                if (gps_loc != null) {
+                if (gps_loc != null)
+                {
                     finalLoc = net_loc;
-                } else if (net_loc != null) {
+                } else if (net_loc != null)
+                {
                     finalLoc = gps_loc;
                 }
             }
 
             // Initialize the location fields
-            if (finalLoc != null) {
+            if (finalLoc != null)
+            {
                 positionLocation = finalLoc;
                 long daysOld = (System.currentTimeMillis() - finalLoc.getTime()) / DAY_IN_MILLISECONDS;
-                if (daysOld <= 1) {
+                if (daysOld <= 1)
+                {
                     Toast.makeText(ActivityNewShout.this, "" + daysOld, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ActivityNewShout.this, GeocodeAddressIntentService.class);
                     intent.putExtra(Constants.RECEIVER, mResultReceiver);
@@ -242,27 +270,34 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                             finalLoc.getLongitude());
 
                     startService(intent);
-                } else {
+                } else
+                {
                     mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
                 }
-            } else {
+            } else
+            {
                 mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
             }
 
         }
 
         @Override
-        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+        public void onPermissionDenied(ArrayList<String> deniedPermissions)
+        {
 
         }
     };
 
 
-    public void uploadImage() {
+    public void uploadImage()
+    {
     /*
       Create the @Upload object
      */
-        if (chosenFile == null) return;
+        if (chosenFile == null)
+        {
+            return;
+        }
         createUpload(chosenFile);
 
     /*
@@ -271,7 +306,8 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
         new UploadService(this).Execute(upload, new UiCallback());
     }
 
-    private void createUpload(File image) {
+    private void createUpload(File image)
+    {
         upload = new Upload();
 
         upload.image = image;
@@ -281,22 +317,32 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_new_shout);
 
-        findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 finish();
             }
         });
 
         llCoverPhoto = (LinearLayout) findViewById(R.id.ll_coverPhoto);
 
-        findViewById(R.id.fl_coverPhoto).setOnClickListener(new View.OnClickListener() {
+        ivUserProfilePic = (ImageView) findViewById(R.id.iv_userProfilePic);
+
+        Picasso.with(this).load("https://lh3.googleusercontent.com/-8twv_aWLqtY/AAAAAAAAAAI/AAAAAAAAAQ8/K1r--rxdH3w/s120-c/photo.jpg")
+                .transform(new CircleTransform()).into(ivUserProfilePic);
+
+        findViewById(R.id.fl_coverPhoto).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 isAddingCoverPhoto = true;
                 tedBottomPicker.show(getSupportFragmentManager());
             }
@@ -304,9 +350,11 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
         ivCoverPhoto = (ImageView) findViewById(R.id.iv_coverPhoto);
 
-        findViewById(R.id.iv_gallery).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_gallery).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 tedBottomPicker.show(getSupportFragmentManager());
                 //selectImage();
             }
@@ -314,42 +362,52 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
         final Button post = (Button) findViewById(R.id.btn_postFeed);
 
-        post.setOnClickListener(new View.OnClickListener() {
+        post.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 post.setVisibility(View.GONE);
                 pbProcessing.setVisibility(View.VISIBLE);
 
                 String location = "0,0";
 
-                if (positionLocation != null) {
+                if (positionLocation != null)
+                {
                     location = positionLocation.getLatitude() + "," + positionLocation.getLongitude();
                 }
                 final String title = etTitle.getText().toString();
                 final String body = etBody.getText().toString();
 
-                Feed.postFeed("9409210488", location, imageResponse.data.link, title, body, new Feed.PostFeedListener() {
+                Feed.postFeed("9409210488", location, imageResponse.data.link, title, body, new Feed.PostFeedListener()
+                {
                     @Override
-                    public void onPostSuccess() {
+                    public void onPostSuccess()
+                    {
                         post.setVisibility(View.VISIBLE);
                         pbProcessing.setVisibility(View.GONE);
+                        ActivityNewShout.this.finish();
                     }
 
                     @Override
-                    public void onPostFailed() {
-
+                    public void onPostFailed()
+                    {
+                        post.setVisibility(View.VISIBLE);
+                        pbProcessing.setVisibility(View.GONE);
                     }
                 });
             }
         });
 
 
-        final Html.ImageGetter imageGetter = new Html.ImageGetter() {
+        final Html.ImageGetter imageGetter = new Html.ImageGetter()
+        {
             Drawable d = null;
 
             @Override
-            public Drawable getDrawable(final String source) {
+            public Drawable getDrawable(final String source)
+            {
 
                 LevelListDrawable d = new LevelListDrawable();
                 Drawable empty = getResources().getDrawable(R.drawable.ic_autorenew_black_18dp);
@@ -364,9 +422,11 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
         };
 
 
-        findViewById(R.id.ic_link).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ic_link).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ActivityNewShout.this);
                 builder.setTitle("Insert Link");
 
@@ -377,18 +437,22 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                 builder.setView(input);
 
                 // Set up the buttons
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
                         linkUrl = input.getText().toString();
                         linkUrl = "<img src='" + linkUrl + "'/>";
                         etBody.setText(Html.fromHtml(etBody.getText() + linkUrl, imageGetter, null));
                     }
                 });
 
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
                         dialog.cancel();
                     }
                 });
@@ -422,14 +486,16 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         Log.i(TAG, "onActivityResult: ON ACTIVITY RESULT");
 
         Log.i(TAG, "onActivityResult: RESULT CODE IS OK!!!");
 
         Log.i(TAG, "onActivityResult: REQUEST CODE IS: " + resultCode);
 
-        switch (requestCode) {
+        switch (requestCode)
+        {
             case SELECT_FILE:
                 onSelectFromGalleryResult(data);
                 break;
@@ -439,14 +505,16 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                 break;
 
             case REQUEST_LOCATION:
-                if (data != null) {
+                if (data != null)
+                {
                     Intent intent = new Intent(this, GeocodeAddressIntentService.class);
                     intent.putExtra(Constants.RECEIVER, mResultReceiver);
                     intent.putExtra(Constants.FETCH_TYPE_EXTRA, Constants.USE_ADDRESS_LOCATION);
 
                     intent.putExtra(Constants.LOCATION_LATITUDE_DATA_EXTRA, data.getDoubleExtra("lat", 0));
                     intent.putExtra(Constants.LOCATION_LONGITUDE_DATA_EXTRA, data.getDoubleExtra("lng", 0));
-                } else {
+                } else
+                {
                     Log.i(TAG, "onActivityResult: DATA is NULL!!!!!");
                 }
                 break;
@@ -462,12 +530,16 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
 
     @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data) {
+    private void onSelectFromGalleryResult(Intent data)
+    {
         Bitmap bm = null;
-        if (data != null) {
-            try {
+        if (data != null)
+        {
+            try
+            {
                 bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 e.printStackTrace();
             }
         }
@@ -475,21 +547,25 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void onCaptureImageResult(Intent data) {
+    private void onCaptureImageResult(Intent data)
+    {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         File destination = new File(Environment.getExternalStorageDirectory(),
                 System.currentTimeMillis() + ".jpg");
         FileOutputStream fo;
-        try {
+        try
+        {
             destination.createNewFile();
             fo = new FileOutputStream(destination);
             fo.write(bytes.toByteArray());
             fo.close();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e)
+        {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
         ivSelectedImage.setImageBitmap(thumbnail);
@@ -497,16 +573,22 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
 
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+        switch (requestCode)
+        {
             case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (userChosenTask.equals("Take Photo")) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+                    if (userChosenTask.equals("Take Photo"))
+                    {
                         cameraIntent();
-                    } else if (userChosenTask.equals("Choose from Library")) {
+                    } else if (userChosenTask.equals("Choose from Library"))
+                    {
                         galleryIntent();
                     }
-                } else {
+                } else
+                {
                     //code for deny
                 }
                 break;
@@ -514,27 +596,35 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void selectImage() {
+    private void selectImage()
+    {
         final CharSequence[] items = {"Take Photo", "Choose from Library",
                 "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add Photo!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
+        builder.setItems(items, new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int item) {
+            public void onClick(DialogInterface dialog, int item)
+            {
                 boolean result = Utility.checkPermission(ActivityNewShout.this);
 
-                if (items[item].equals("Take Photo")) {
+                if (items[item].equals("Take Photo"))
+                {
                     userChosenTask = "Take Photo";
-                    if (result) {
+                    if (result)
+                    {
                         cameraIntent();
                     }
-                } else if (items[item].equals("Choose from Library")) {
+                } else if (items[item].equals("Choose from Library"))
+                {
                     userChosenTask = "Choose from Library";
-                    if (result) {
+                    if (result)
+                    {
                         galleryIntent();
                     }
-                } else if (items[item].equals("Cancel")) {
+                } else if (items[item].equals("Cancel"))
+                {
                     dialog.dismiss();
                 }
             }
@@ -543,12 +633,14 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void cameraIntent() {
+    private void cameraIntent()
+    {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CAMERA);
     }
 
-    private void galleryIntent() {
+    private void galleryIntent()
+    {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);//
@@ -556,35 +648,45 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         Intent i = new Intent(ActivityNewShout.this, MapsActivity.class);
         Log.i(TAG, "onClick: REQUEST_LOCATION CODE IS: " + REQUEST_LOCATION);
         startActivityForResult(i, REQUEST_LOCATION);
     }
 
     @SuppressLint("ParcelCreator")
-    class AddressResultReceiver extends ResultReceiver {
-        public AddressResultReceiver(Handler handler) {
+    class AddressResultReceiver extends ResultReceiver
+    {
+        public AddressResultReceiver(Handler handler)
+        {
             super(handler);
         }
 
         @Override
-        protected void onReceiveResult(int resultCode, final Bundle resultData) {
-            if (resultCode == Constants.SUCCESS_RESULT) {
+        protected void onReceiveResult(int resultCode, final Bundle resultData)
+        {
+            if (resultCode == Constants.SUCCESS_RESULT)
+            {
                 //final Address address = resultData.getParcelable(Constants.RESULT_ADDRESS);
-                runOnUiThread(new Runnable() {
+                runOnUiThread(new Runnable()
+                {
                     @Override
-                    public void run() {
+                    public void run()
+                    {
                         String address = resultData.getString(Constants.RESULT_DATA_KEY);
                         address = address.substring(0, address.lastIndexOf(" "));
                         tvLocation.setText(address);
                         tvLocation.setVisibility(View.VISIBLE);
                     }
                 });
-            } else {
-                runOnUiThread(new Runnable() {
+            } else
+            {
+                runOnUiThread(new Runnable()
+                {
                     @Override
-                    public void run() {
+                    public void run()
+                    {
 
                     }
                 });
@@ -593,33 +695,41 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
 
-    class LoadImage extends AsyncTask<Object, Void, Bitmap> {
+    class LoadImage extends AsyncTask<Object, Void, Bitmap>
+    {
 
         private LevelListDrawable mDrawable;
 
         @Override
-        protected Bitmap doInBackground(Object... params) {
+        protected Bitmap doInBackground(Object... params)
+        {
             String source = (String) params[0];
             mDrawable = (LevelListDrawable) params[1];
             Log.d(TAG, "doInBackground " + source);
-            try {
+            try
+            {
                 InputStream is = new URL(source).openStream();
                 return BitmapFactory.decodeStream(is);
-            } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException e)
+            {
                 e.printStackTrace();
-            } catch (MalformedURLException e) {
+            } catch (MalformedURLException e)
+            {
                 e.printStackTrace();
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 e.printStackTrace();
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(Bitmap bitmap) {
+        protected void onPostExecute(Bitmap bitmap)
+        {
             Log.d(TAG, "onPostExecute drawable " + mDrawable);
             Log.d(TAG, "onPostExecute bitmap " + bitmap);
-            if (bitmap != null) {
+            if (bitmap != null)
+            {
                 BitmapDrawable d = new BitmapDrawable(bitmap);
                 mDrawable.addLevel(1, 1, d);
                 mDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
@@ -633,7 +743,8 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
 
-    void checkForPermission() {
+    void checkForPermission()
+    {
         new TedPermission(this)
                 .setPermissionListener(permissionListener)
                 .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
@@ -642,18 +753,22 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private class UiCallback implements Callback<ImageResponse> {
+    private class UiCallback implements Callback<ImageResponse>
+    {
 
         @Override
-        public void success(ImageResponse imageResponse, Response response) {
+        public void success(ImageResponse imageResponse, Response response)
+        {
             Log.i(TAG, imageResponse.toString());
             ActivityNewShout.this.imageResponse = imageResponse;
         }
 
         @Override
-        public void failure(RetrofitError error) {
+        public void failure(RetrofitError error)
+        {
             //Assume we have no connection, since error is null
-            if (error == null) {
+            if (error == null)
+            {
                 //Snackbar.make(findViewById(R.id.rootView), "No internet connection", Snackbar.LENGTH_SHORT).show();
             }
         }
