@@ -3,8 +3,8 @@
 
     <item>
         <bitmap
-            android:gravity="top"
             android:antialias="true"
+            android:gravity="top"
             android:mipMap="true"
             android:src="@drawable/splash_new"/>
     </item>
