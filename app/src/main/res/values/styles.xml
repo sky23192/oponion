@@ -22,4 +22,9 @@
 
     </style>
 
+    <style name="RatingBar" parent="android:style/Widget.Material.RatingBar.Small">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">#daa520</item>
+    </style>
+
 </resources>
