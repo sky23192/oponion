@@ -1,6 +1,7 @@
 package com.app.oponion;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity
         icTabSpotlightOff = LayoutInflater.from(this).inflate(R.layout.ic_tab_spotlight_off, null);
 
         tvFragmentTitle = (TextView) findViewById(R.id.tv_fragmentTitle);
+        tvFragmentTitle.setTypeface(Typeface.createFromAsset(getAssets(), "montserrat_regular.ttf"));
 
         ivUserProfilePic = (ImageView) findViewById(R.id.iv_userProfilePic);
 
@@ -95,13 +97,11 @@ public class MainActivity extends AppCompatActivity
     private void setupViewPager(ViewPager viewPager)
     {
 
-
         adapter.addFragment(CircleFragment.getInstance(this), "CIRCLE");
         adapter.addFragment(SpotlightFragment.getInstance(this), "SPOTLIGHT");
         adapter.addFragment(new OponionFragment(), "OPONION");
 
         viewPager.setAdapter(adapter);
-
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
         {
@@ -114,10 +114,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onPageSelected(int position)
             {
-
                 if (position == 0)
                 {
-
                     tvFragmentTitle.setText("circle");
 
                     tabLayout.getTabAt(0).setCustomView(null);
