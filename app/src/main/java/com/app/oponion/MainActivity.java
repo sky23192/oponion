@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity
 
     ImageView ivUserProfilePic;
 
+    TextView tvFragmentTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -46,7 +49,18 @@ public class MainActivity extends AppCompatActivity
         icTabSpotlightOn = LayoutInflater.from(this).inflate(R.layout.ic_tab_spotlight_on, null);
         icTabSpotlightOff = LayoutInflater.from(this).inflate(R.layout.ic_tab_spotlight_off, null);
 
+        tvFragmentTitle = (TextView) findViewById(R.id.tv_fragmentTitle);
+
         ivUserProfilePic = (ImageView) findViewById(R.id.iv_userProfilePic);
+
+        ivUserProfilePic.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            }
+        });
 
         findViewById(R.id.iv_search).setOnClickListener(new View.OnClickListener()
         {
@@ -66,7 +80,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        Picasso.with(this).load("https://lh3.googleusercontent.com/-FffqJSvWgoM/AAAAAAAAAAI/AAAAAAAAAFc/O-PfLgisbgQ/s120-c/photo.jpg")
+        Picasso.with(this).load("https://lh3.googleusercontent.com/-8twv_aWLqtY/AAAAAAAAAAI/AAAAAAAAAQ8/K1r--rxdH3w/s100-p-rw-no/photo.jpg")
                 .transform(new CircleTransform()).into(ivUserProfilePic);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -103,6 +117,9 @@ public class MainActivity extends AppCompatActivity
 
                 if (position == 0)
                 {
+
+                    tvFragmentTitle.setText("circle");
+
                     tabLayout.getTabAt(0).setCustomView(null);
                     tabLayout.getTabAt(1).setCustomView(null);
                     tabLayout.getTabAt(2).setCustomView(null);
@@ -112,6 +129,8 @@ public class MainActivity extends AppCompatActivity
                     tabLayout.getTabAt(2).setCustomView(icTabOnionOff);
                 } else if (position == 1)
                 {
+                    tvFragmentTitle.setText("shout");
+
                     tabLayout.getTabAt(0).setCustomView(null);
                     tabLayout.getTabAt(1).setCustomView(null);
                     tabLayout.getTabAt(2).setCustomView(null);
@@ -121,6 +140,8 @@ public class MainActivity extends AppCompatActivity
                     tabLayout.getTabAt(2).setCustomView(icTabOnionOff);
                 } else if (position == 2)
                 {
+                    tvFragmentTitle.setText("oponion");
+
                     tabLayout.getTabAt(0).setCustomView(null);
                     tabLayout.getTabAt(1).setCustomView(null);
                     tabLayout.getTabAt(2).setCustomView(null);

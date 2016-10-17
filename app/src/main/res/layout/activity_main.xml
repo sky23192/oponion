@@ -39,6 +39,16 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"/>
 
+                    <TextView
+                        android:id="@+id/tv_fragmentTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center"
+                        android:text="oponion"
+                        android:textColor="@android:color/black"
+                        android:textSize="16dp"/>
+
                 </LinearLayout>
 
                 <android.support.v7.widget.AppCompatImageView
@@ -53,9 +63,9 @@
                     android:id="@+id/iv_search"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:tint="#5949a3"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/places_ic_search"/>
+                    android:src="@drawable/places_ic_search"
+                    android:tint="#5949a3"/>
 
 
             </LinearLayout>
