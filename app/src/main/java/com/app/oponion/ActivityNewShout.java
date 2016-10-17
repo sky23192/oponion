@@ -194,7 +194,6 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                                 Picasso.with(ActivityNewShout.this).load(uri).into(ivCoverPhoto);
                                 llCoverPhoto.setVisibility(View.GONE);
                                 isAddingCoverPhoto = false;
-                                uploadImage();
                             }
                         }
                     })
@@ -380,23 +379,30 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
                 final String title = etTitle.getText().toString();
                 final String body = etBody.getText().toString();
 
-                Feed.postFeed("9409210488", location, imageResponse.data.link, title, body, new Feed.PostFeedListener()
+                if (chosenFile != null)
                 {
-                    @Override
-                    public void onPostSuccess()
+                    uploadImage();
+                } else
+                {
+                    Feed.postFeed("9409210488", location, imageResponse.data.link, title, body, new Feed.PostFeedListener()
                     {
-                        post.setVisibility(View.VISIBLE);
-                        pbProcessing.setVisibility(View.GONE);
-                        ActivityNewShout.this.finish();
-                    }
+                        @Override
+                        public void onPostSuccess()
+                        {
+                            post.setVisibility(View.VISIBLE);
+                            pbProcessing.setVisibility(View.GONE);
+                            ActivityNewShout.this.finish();
+                        }
 
-                    @Override
-                    public void onPostFailed()
-                    {
-                        post.setVisibility(View.VISIBLE);
-                        pbProcessing.setVisibility(View.GONE);
-                    }
-                });
+                        @Override
+                        public void onPostFailed()
+                        {
+                            post.setVisibility(View.VISIBLE);
+                            pbProcessing.setVisibility(View.GONE);
+                        }
+                    });
+                }
+
             }
         });
 
@@ -769,7 +775,7 @@ public class ActivityNewShout extends AppCompatActivity implements View.OnClickL
             //Assume we have no connection, since error is null
             if (error == null)
             {
-                //Snackbar.make(findViewById(R.id.rootView), "No internet connection", Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(ActivityNewShout.this, "No internet connection", Toast.LENGTH_SHORT).show();
             }
         }
     }
