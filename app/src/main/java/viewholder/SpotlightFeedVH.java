@@ -1,14 +1,18 @@
 package viewholder;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.oponion.R;
+import com.app.oponion.ShoutDetailViewActivity;
 import com.squareup.picasso.Picasso;
 
 import component.FeedItem;
@@ -29,7 +33,7 @@ public class SpotlightFeedVH extends RecyclerView.ViewHolder implements FeedItem
 
     SpotlightFeed model;
 
-    public SpotlightFeedVH(Context context, View itemView)
+    public SpotlightFeedVH(final Context context, View itemView)
     {
         super(itemView);
         this.context = context;
@@ -58,6 +62,21 @@ public class SpotlightFeedVH extends RecyclerView.ViewHolder implements FeedItem
                 model.totalVotes = model.totalVotes - 1;
             }
         });
+
+        ivFeedImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent i = new Intent(context.getApplicationContext(), ShoutDetailViewActivity.class);
+
+                i.putExtra("feed_title", model.feedTitle);
+                i.putExtra("feed_image_url", model.feedImageUrl);
+
+                context.startActivity(new Intent(view.getContext(), ShoutDetailViewActivity.class));
+            }
+        });
+
     }
 
     public static SpotlightFeedVH create(Context context, ViewGroup parent)
@@ -72,16 +91,13 @@ public class SpotlightFeedVH extends RecyclerView.ViewHolder implements FeedItem
 
     public static void bind(SpotlightFeedVH holder, SpotlightFeed model)
     {
-        if (holder.model == null)
+        holder.model = model;
+        holder.tvFeedTitle.setText(holder.model.feedTitle);
+        holder.tvTotalVotes.setText(String.valueOf(holder.model.totalVotes));
+        if (model.feedImageUrl != null && model.locationImage != null)
         {
-            holder.model = model;
-            holder.tvFeedTitle.setText(holder.model.feedTitle);
-            holder.tvTotalVotes.setText(String.valueOf(holder.model.totalVotes));
-            if (model.feedImageUrl != null && model.locationImage != null)
-            {
-                Picasso.with(holder.context).load(holder.model.feedImageUrl).into(holder.ivFeedImage);
-                Picasso.with(holder.context).load(holder.model.locationImage).into(holder.ivLocationImage);
-            }
+            Picasso.with(holder.context).load(holder.model.feedImageUrl).into(holder.ivFeedImage);
+            Picasso.with(holder.context).load(holder.model.locationImage).into(holder.ivLocationImage);
         }
     }
 

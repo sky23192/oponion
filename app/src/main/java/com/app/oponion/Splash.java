@@ -10,24 +10,30 @@ import android.support.v7.app.AppCompatActivity;
  * Created by rutvik on 28-06-2016 at 04:06 PM.
  */
 
-public class Splash extends AppCompatActivity {
+public class Splash extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+
+        //setContentView(R.layout.splash);
 
         Handler mHandler = new Handler();
 
-        mHandler.postDelayed(new Runnable() {
+        mHandler.postDelayed(new Runnable()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
 
                 Intent i = new Intent(Splash.this, MainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
 
             }
-        }, 2000);
+        }, 3000);
 
     }
 }

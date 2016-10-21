@@ -65,9 +65,9 @@ public class SpotlightFragment extends Fragment
         rvSpotlightFeeds.setLayoutManager(sgm);
 
         rvSpotlightFeeds.setHasFixedSize(true);
-        rvSpotlightFeeds.setItemViewCacheSize(20);
-        rvSpotlightFeeds.setDrawingCacheEnabled(true);
-        rvSpotlightFeeds.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
+        //rvSpotlightFeeds.setItemViewCacheSize(20);
+        //rvSpotlightFeeds.setDrawingCacheEnabled(true);
+        //rvSpotlightFeeds.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
 
         adapter = new SpotlightFeedsAdapter(context);
 

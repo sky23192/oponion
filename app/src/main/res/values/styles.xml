@@ -14,11 +14,7 @@
 
     <style name="splashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
-
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowBackground">@drawable/raw_new</item>
-
+        <item name="android:windowBackground">@drawable/multicolor</item>
 
     </style>
 
