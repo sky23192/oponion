@@ -24,13 +24,15 @@ public class SpotlightFeedsAdapter extends RecyclerView.Adapter
 
     Context context;
 
-    public List<SpotlightFeed> spotlightFeedList=new LinkedList<>();
+    public List<SpotlightFeed> spotlightFeedList = new LinkedList<>();
 
-    public SpotlightFeedsAdapter(Context context){
-        this.context=context;
+    public SpotlightFeedsAdapter(Context context)
+    {
+        this.context = context;
     }
 
-    public void addSpotlightFeed(SpotlightFeed feed){
+    public void addSpotlightFeed(SpotlightFeed feed)
+    {
         spotlightFeedList.add(feed);
         notifyItemInserted(spotlightFeedList.indexOf(feed));
     }
@@ -38,13 +40,13 @@ public class SpotlightFeedsAdapter extends RecyclerView.Adapter
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        return SpotlightFeedVH.create(context,parent);
+        return SpotlightFeedVH.create(context, parent);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position)
     {
-        SpotlightFeedVH.bind((SpotlightFeedVH)holder,spotlightFeedList.get(position));
+        SpotlightFeedVH.bind((SpotlightFeedVH) holder, spotlightFeedList.get(position));
     }
 
     @Override

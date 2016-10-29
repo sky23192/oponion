@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.oponion.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -64,10 +65,29 @@ public class SpotlightFragment extends Fragment
 
         rvSpotlightFeeds.setLayoutManager(sgm);
 
+        rvSpotlightFeeds.setNestedScrollingEnabled(false);
+
         rvSpotlightFeeds.setHasFixedSize(true);
-        //rvSpotlightFeeds.setItemViewCacheSize(20);
-        //rvSpotlightFeeds.setDrawingCacheEnabled(true);
-        //rvSpotlightFeeds.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
+        /*rvSpotlightFeeds.setItemViewCacheSize(20);
+        rvSpotlightFeeds.setDrawingCacheEnabled(true);
+        rvSpotlightFeeds.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);*/
+
+        rvSpotlightFeeds.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+            {
+                super.onScrollStateChanged(recyclerView, newState);
+                final Picasso picasso = Picasso.with(context);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE)
+                {
+                    picasso.resumeTag("resume_tag");
+                } else
+                {
+                    picasso.pauseTag("resume_tag");
+                }
+            }
+        });
 
         adapter = new SpotlightFeedsAdapter(context);
 

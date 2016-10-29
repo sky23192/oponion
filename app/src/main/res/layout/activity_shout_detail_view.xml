@@ -26,7 +26,8 @@
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_captain"/>
+            android:tint="@color/darkGrey"
+            android:src="@drawable/ic_captain_thin"/>
 
         <ImageView
             android:layout_width="0dp"
@@ -50,7 +51,8 @@
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_comment2"/>
+            android:src="@drawable/ic_comment2"
+            android:tint="@color/darkGrey"/>
 
     </LinearLayout>
 

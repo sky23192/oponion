@@ -24,6 +24,8 @@ public class ProfileViewComponent extends LinearLayout
 
     ImageView ivProfileUserPic, ivProfileCover;
 
+    public ImageView ivBack;
+
     TextView tvProfileUserName, tvProfileFollowers, tvProfileFollowing;
 
     ProfileView profileView;
@@ -48,6 +50,8 @@ public class ProfileViewComponent extends LinearLayout
         tvProfileFollowers = (TextView) findViewById(R.id.tv_profileFollowers);
         tvProfileFollowing = (TextView) findViewById(R.id.tv_profileFollowing);
 
+        ivBack = (ImageView) findViewById(R.id.iv_back);
+
     }
 
     public void setProfileViewModel(ProfileView profileView)
@@ -61,15 +65,6 @@ public class ProfileViewComponent extends LinearLayout
         tvProfileUserName.setText(profileView.getName());
         tvProfileFollowing.setText(profileView.getFollowing());
         tvProfileFollowers.setText(profileView.getFollowers());
-
-        findViewById(R.id.iv_back).setOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-
-            }
-        });
 
     }
 

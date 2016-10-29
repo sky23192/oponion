@@ -1,5 +1,7 @@
 package viewmodel;
 
+import android.app.Activity;
+
 import java.util.ArrayList;
 
 /**
@@ -12,9 +14,12 @@ public class ProfileView
     String profilePicUrl, coverPicUrl, name, followers, following;
     final ArrayList<String> tags;
 
-    public ProfileView(String profilePicUrl, String coverPicUrl, String name, String followers,
+    public Activity activity;
+
+    public ProfileView(Activity activity, String profilePicUrl, String coverPicUrl, String name, String followers,
                        String following)
     {
+        this.activity = activity;
         this.coverPicUrl = coverPicUrl;
         this.profilePicUrl = profilePicUrl;
         this.name = name;
