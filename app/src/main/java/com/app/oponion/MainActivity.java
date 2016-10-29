@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity
 
         adapter.addFragment(CircleFragment.getInstance(this), "CIRCLE");
         adapter.addFragment(SpotlightFragment.getInstance(this), "SPOTLIGHT");
-        adapter.addFragment(new OponionFragment(), "OPONION");
+        adapter.addFragment(OponionFragment.getInstance(this), "OPONION");
 
         viewPager.setAdapter(adapter);
 

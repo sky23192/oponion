@@ -32,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity
         rvProfileView.setAdapter(adapter);
 
         profileView =
-                new ProfileView("https://lh3.googleusercontent.com/-8twv_aWLqtY/AAAAAAAAAAI/AAAAAAAAAQ8/K1r--rxdH3w/s200-p-rw-no/photo.jpg",
+                new ProfileView(this,"https://lh3.googleusercontent.com/-8twv_aWLqtY/AAAAAAAAAAI/AAAAAAAAAQ8/K1r--rxdH3w/s200-p-rw-no/photo.jpg",
                         "https://profalbrecht.files.wordpress.com/2009/07/road01.jpg",
                         "Rutvik Mehta", "55", "104");
 

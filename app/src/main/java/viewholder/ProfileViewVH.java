@@ -26,18 +26,23 @@ public class ProfileViewVH extends RecyclerView.ViewHolder
         profileViewComponent = itemView;
     }
 
-    public static ProfileViewVH create(Context context, ViewGroup parent)
+    public static ProfileViewVH create(final Context context, ViewGroup parent)
     {
         return new ProfileViewVH(new ProfileViewComponent(context));
     }
 
-    public static void bind(ProfileViewVH vh, ProfileView model)
+    public static void bind(final ProfileViewVH vh, final ProfileView model)
     {
-        if (vh.model == null)
+        vh.model = model;
+        vh.profileViewComponent.setProfileViewModel(vh.model);
+        vh.profileViewComponent.ivBack.setOnClickListener(new View.OnClickListener()
         {
-            vh.model = model;
-            vh.profileViewComponent.setProfileViewModel(vh.model);
-        }
+            @Override
+            public void onClick(View view)
+            {
+                vh.model.activity.finish();
+            }
+        });
     }
 
 }
