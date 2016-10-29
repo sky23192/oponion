@@ -30,7 +30,7 @@ public class OponionFeedAdapter extends RecyclerView.Adapter
     public void addNewOponionFeed(final OponionFeed oponionFeed)
     {
         oponionFeedList.add(oponionFeed);
-        notifyItemInserted(oponionFeedList.size());
+        notifyItemInserted(oponionFeedList.indexOf(oponionFeed));
     }
 
     @Override

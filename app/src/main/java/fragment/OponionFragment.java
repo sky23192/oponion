@@ -52,6 +52,8 @@ public class OponionFragment extends Fragment
 
         rvOponionFeeds.setHasFixedSize(true);
 
+        rvOponionFeeds.setNestedScrollingEnabled(false);
+
         adapter = new OponionFeedAdapter(context);
 
         rvOponionFeeds.setAdapter(adapter);
