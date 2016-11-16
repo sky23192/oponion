@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="3dp"
+    android:layout_height="200dp"
+    android:layout_margin="4dp"
     android:background="@drawable/rounsed_bg"
-    android:elevation="3dp"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:elevation="3dp">
+
+    <ImageView
+        android:id="@+id/iv_oponionFeedImage"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,13 +20,15 @@
         android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:padding="5dp"
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_oponionFeedBy"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/test_image"/>
+            android:padding="5dp"
+            android:src="@drawable/test_image"
+            app:civ_border_color="#FFFFFFFF"
+            app:civ_border_width="1dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -35,9 +42,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:paddingTop="5dp"
-                android:text="Akash Patel"
-                android:textColor="#000000"
-                android:textSize="16sp"
+                android:text="Apple Inc."
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -45,9 +52,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
-                android:text="at rutvik"
+                android:text="8h ago"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"
+                android:textSize="8sp"
                 android:textStyle="bold"/>
 
         </LinearLayout>
@@ -69,24 +76,12 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv_oponionFeedImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"/>
-
-    <TextView
-        android:id="@+id/tv_oponionFeedTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="And you are doing good with the domain and  I am wondering if you could oakwood yep I have the..."
-        android:textColor="@android:color/black"
-        android:textSize="18sp"/>
 
     <LinearLayout
+        android:id="@+id/ll_bottomContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="5dp"
         android:gravity="right">
 
@@ -108,6 +103,7 @@
                 android:layout_gravity="center"
                 android:layout_marginRight="5dp"
                 android:text="177"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/vote_count_text"/>
 
             <ImageView
@@ -140,4 +136,15 @@
 
     </LinearLayout>
 
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_oponionFeedTitle"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ll_bottomContent"
+        android:layout_centerInParent="true"
+        android:text="And you are doing good with the domain and  I am wondering if you could oakwood yep I have the..."
+        android:textColor="@android:color/white"
+        android:textSize="12sp"/>
+
+</RelativeLayout>
