@@ -70,21 +70,23 @@ public class OponionFragment extends Fragment
         for (int i = 0; i < 5; i++)
         {
             OponionFeed of1
-                    = new OponionFeed("http://xojsmn.com/xojsmnwp/wp-content/uploads/2015/01/apple-logo-grey-300x300.jpg",
-                    "Apple", "Apple Launches New MacBook Pro", "5h ago", "462");
+                    = new OponionFeed("http://www.elderlytech.com/wp-content/uploads/2015/09/Apple-logo-black.jpg",
+                    "Apple Inc.", "Apple Launches New MacBook Pro", "5h ago", "462");
+            of1.setFeedContentImage("http://tech.firstpost.com/wp-content/uploads/2014/01/MacBook-Air.jpg");
 
             adapter.addNewOponionFeed(of1);
 
             OponionFeed of3
-                    = new OponionFeed("http://icons.iconarchive.com/icons/alecive/flatwoken/512/Apps-Samsung-icon.png",
+                    = new OponionFeed("http://www.samsung.com/common/img/logo-square-letter.png",
                     "Samsung", "Samsung has something exciting to showoff", "1d ago", "231");
-            of3.setFeedContentImage("http://careace.net/wp-content/uploads/2010/07/android-samsung-icon.jpg");
+            of3.setFeedContentImage("http://androidspin.com/wp-content/uploads/2013/02/Samsung-Galaxy-S-III-Unpacked.png");
 
             adapter.addNewOponionFeed(of3);
 
             OponionFeed of4
                     = new OponionFeed("http://www.oracle.com/us/oracle-social-share-fb-480-2516041.jpg",
-                    "Oracle", "Oracle,s new database system cluster", "5h ago", "462");
+                    "Oracle", "Oracle,s new database system cluster", "12h ago", "251");
+            of4.setFeedContentImage("http://electricthumb.in/wp-content/uploads/2016/04/oracle1.jpg");
 
             adapter.addNewOponionFeed(of4);
         }

@@ -13,7 +13,9 @@ import com.app.oponion.ActivityNewShout;
 import com.app.oponion.R;
 import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import extra.CircleTransform;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 import model.OponionFeed;
 
 /**
@@ -27,7 +29,9 @@ public class OponionFeedVH extends RecyclerView.ViewHolder
 
     final Context context;
 
-    ImageView ivOponionFeedBy, ivOponionFeedImage;
+    CircleImageView ivOponionFeedBy;
+
+    ImageView ivOponionFeedImage;
 
     TextView tvOponionFeedBy, tvOponionFeedExtra,
             tvOponionFeedTitle, tvOponionFeedTotalVotes;
@@ -37,7 +41,7 @@ public class OponionFeedVH extends RecyclerView.ViewHolder
         super(itemView);
         this.context = context;
 
-        ivOponionFeedBy = (ImageView) itemView.findViewById(R.id.iv_oponionFeedBy);
+        ivOponionFeedBy = (CircleImageView) itemView.findViewById(R.id.iv_oponionFeedBy);
         ivOponionFeedImage = (ImageView) itemView.findViewById(R.id.iv_oponionFeedImage);
 
         tvOponionFeedBy = (TextView) itemView.findViewById(R.id.tv_oponionFeedBy);
@@ -72,6 +76,7 @@ public class OponionFeedVH extends RecyclerView.ViewHolder
         if (holder.model.getFeedContentImage() != null)
         {
             Picasso.with(holder.context).load(holder.model.getFeedContentImage())
+                    .transform(new RoundedCornersTransformation(10, 0))
                     .into(holder.ivOponionFeedImage);
         }
 
