@@ -1,6 +1,7 @@
 package viewholder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.app.oponion.ActivityCommunity;
 import com.app.oponion.R;
+import com.app.oponion.ShoutDetailViewActivity;
 import com.github.siyamed.shapeimageview.mask.PorterShapeImageView;
 import com.squareup.picasso.Picasso;
 
@@ -34,10 +37,20 @@ public class OponionFeedVH extends RecyclerView.ViewHolder
     TextView tvOponionFeedBy, tvOponionFeedExtra,
             tvOponionFeedTitle, tvOponionFeedTotalVotes;
 
-    public OponionFeedVH(Context context, View itemView)
+    public OponionFeedVH(final Context context, View itemView)
     {
         super(itemView);
         this.context = context;
+
+        itemView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                context.startActivity(new Intent(context,
+                        ActivityCommunity.class));
+            }
+        });
 
         ivOponionFeedBy = (CircleImageView) itemView.findViewById(R.id.iv_oponionFeedBy);
         ivOponionFeedImage = (PorterShapeImageView) itemView.findViewById(R.id.iv_oponionFeedImage);
@@ -69,11 +82,13 @@ public class OponionFeedVH extends RecyclerView.ViewHolder
 
         Picasso.with(holder.context).load(holder.model.getFeedByImage())
                 .transform(new CircleTransform())
+                .tag("OPONION")
                 .into(holder.ivOponionFeedBy);
 
         if (holder.model.getFeedContentImage() != null)
         {
             Picasso.with(holder.context).load(holder.model.getFeedContentImage())
+                    .tag("OPONION")
                     .into(holder.ivOponionFeedImage);
         }
 

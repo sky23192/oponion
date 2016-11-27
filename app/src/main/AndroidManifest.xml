@@ -66,6 +66,9 @@
         </activity>
         <activity android:name=".ShoutDetailViewActivity">
         </activity>
+        <activity android:name=".ActivityCommunity">
+
+        </activity>
     </application>
 
 </manifest>

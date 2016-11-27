@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.app.oponion.R;
 import com.github.siyamed.shapeimageview.mask.PorterShapeImageView;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.SingleCommunityCard;
@@ -33,6 +34,14 @@ public class CommunityPostVH extends RecyclerView.ViewHolder
     {
         super(itemView);
         this.context = context;
+
+        tvCommunityRating = (TextView) itemView.findViewById(R.id.tv_communityPostRating);
+        tvCommunityName = (TextView) itemView.findViewById(R.id.tv_communityName);
+        tvCommunityContentText = (TextView) itemView.findViewById(R.id.tv_communityContentText);
+
+        ivCommunityBg = (PorterShapeImageView) itemView.findViewById(R.id.iv_communityPostBg);
+        ivCommunityLogo = (CircleImageView) itemView.findViewById(R.id.iv_communityLogo);
+
     }
 
     public static CommunityPostVH create(final Context context, final ViewGroup parent)
@@ -45,6 +54,20 @@ public class CommunityPostVH extends RecyclerView.ViewHolder
     {
 
         vh.model = model;
+
+        vh.tvCommunityContentText.setText(model.getCommunityPostContentText());
+        vh.tvCommunityName.setText(model.getCommunityPostTitle());
+        vh.tvCommunityRating.setText(model.getCommunityPostRating());
+
+        Picasso.with(vh.context)
+                .load(model.getCommunityPostLogo())
+                .tag("COMMUNITY")
+                .into(vh.ivCommunityLogo);
+
+        Picasso.with(vh.context)
+                .load(model.getCommunityPostBg())
+                .tag("COMMUNITY")
+                .into(vh.ivCommunityBg);
 
     }
 

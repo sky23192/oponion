@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.oponion.R;
+import com.squareup.picasso.Picasso;
 
 import adapter.OponionFeedAdapter;
 import model.OponionFeed;
@@ -57,6 +58,21 @@ public class OponionFragment extends Fragment
         adapter = new OponionFeedAdapter(context);
 
         rvOponionFeeds.setAdapter(adapter);
+
+        rvOponionFeeds.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+            {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE)
+                {
+                    Picasso.with(getActivity()).resumeTag("OPONION");
+                } else
+                {
+                    Picasso.with(getActivity()).pauseTag("OPONION");
+                }
+            }
+        });
 
         addTestOponionFeeds();
 
