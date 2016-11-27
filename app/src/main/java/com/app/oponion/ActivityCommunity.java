@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ScrollView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.squareup.picasso.Picasso;
 
@@ -25,6 +26,14 @@ public class ActivityCommunity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community);
+
+        if (getSupportActionBar() != null)
+        {
+            getSupportActionBar().setTitle("Community");
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         rvYoutubers = (RecyclerView) findViewById(R.id.rv_youtubers);
         rvPoliticians = (RecyclerView) findViewById(R.id.rv_politicians);
@@ -133,5 +142,22 @@ public class ActivityCommunity extends AppCompatActivity
 
         youtubeAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.community_activity_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if (item.getItemId() == android.R.id.home)
+        {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
