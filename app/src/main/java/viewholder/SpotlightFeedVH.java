@@ -2,9 +2,7 @@ package viewholder;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
@@ -13,12 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.oponion.R;
 import com.app.oponion.ShoutDetailViewActivity;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import component.FeedItem;
 import model.SpotlightFeed;
@@ -97,10 +93,10 @@ public class SpotlightFeedVH extends RecyclerView.ViewHolder implements FeedItem
     public static void bind(SpotlightFeedVH holder, SpotlightFeed model)
     {
 
-        Display display = ((AppCompatActivity) holder.context).getWindowManager().getDefaultDisplay();
+        /*Display display = ((AppCompatActivity) holder.context).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int width = size.x;
+        int width = size.x;*/
 
         holder.model = model;
         holder.tvFeedTitle.setText(holder.model.feedTitle);
@@ -108,9 +104,8 @@ public class SpotlightFeedVH extends RecyclerView.ViewHolder implements FeedItem
         if (model.feedImageUrl != null && model.locationImage != null)
         {
             Picasso.with(holder.context).load(holder.model.feedImageUrl)
-                    .resize(width, 0).into(holder.ivFeedImage);
-            Picasso.with(holder.context).load(holder.model.locationImage)
-                    .fit().into(holder.ivLocationImage);
+                    .tag("resume_tag")
+                    .into(holder.ivFeedImage);
         }
     }
 

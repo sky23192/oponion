@@ -93,6 +93,14 @@ public class SpotlightFragment extends Fragment
 
         rvSpotlightFeeds.setAdapter(adapter);
 
+        //tryLoadingFeedsFromFirebase();
+
+        return view;
+    }
+
+    private void tryLoadingFeedsFromFirebase()
+    {
+
         try
         {
             Feed.getFeeds(new Feed.FeedListener()
@@ -171,7 +179,7 @@ public class SpotlightFragment extends Fragment
 
         adapter.notifyDataSetChanged();
 
-        return view;
+
     }
 
 }

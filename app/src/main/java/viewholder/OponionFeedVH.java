@@ -6,16 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.app.oponion.ActivityNewShout;
 import com.app.oponion.R;
+import com.github.siyamed.shapeimageview.mask.PorterShapeImageView;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import extra.CircleTransform;
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 import model.OponionFeed;
 
 /**
@@ -31,18 +29,18 @@ public class OponionFeedVH extends RecyclerView.ViewHolder
 
     CircleImageView ivOponionFeedBy;
 
-    ImageView ivOponionFeedImage;
+    PorterShapeImageView ivOponionFeedImage;
 
     TextView tvOponionFeedBy, tvOponionFeedExtra,
             tvOponionFeedTitle, tvOponionFeedTotalVotes;
 
-    public OponionFeedVH(Context context, View itemView)
+    public OponionFeedVH(final Context context, View itemView)
     {
         super(itemView);
         this.context = context;
 
         ivOponionFeedBy = (CircleImageView) itemView.findViewById(R.id.iv_oponionFeedBy);
-        ivOponionFeedImage = (ImageView) itemView.findViewById(R.id.iv_oponionFeedImage);
+        ivOponionFeedImage = (PorterShapeImageView) itemView.findViewById(R.id.iv_oponionFeedImage);
 
         tvOponionFeedBy = (TextView) itemView.findViewById(R.id.tv_oponionFeedBy);
         tvOponionFeedExtra = (TextView) itemView.findViewById(R.id.tv_oponionFeedExtra);
@@ -64,19 +62,17 @@ public class OponionFeedVH extends RecyclerView.ViewHolder
 
     public static void bind(final OponionFeedVH holder, final OponionFeed model)
     {
-        if (holder.model == null)
-        {
-            holder.model = model;
-        }
+        holder.model = model;
 
         Picasso.with(holder.context).load(holder.model.getFeedByImage())
                 .transform(new CircleTransform())
+                .tag("OPONION")
                 .into(holder.ivOponionFeedBy);
 
         if (holder.model.getFeedContentImage() != null)
         {
             Picasso.with(holder.context).load(holder.model.getFeedContentImage())
-                    .transform(new RoundedCornersTransformation(10, 0))
+                    .tag("OPONION")
                     .into(holder.ivOponionFeedImage);
         }
 

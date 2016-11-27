@@ -1,6 +1,7 @@
 package fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.app.oponion.ActivityCommunity;
 import com.app.oponion.R;
+import com.squareup.picasso.Picasso;
 
 import adapter.OponionFeedAdapter;
 import model.OponionFeed;
@@ -57,6 +60,31 @@ public class OponionFragment extends Fragment
         adapter = new OponionFeedAdapter(context);
 
         rvOponionFeeds.setAdapter(adapter);
+
+        rvOponionFeeds.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState)
+            {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE)
+                {
+                    Picasso.with(getActivity()).resumeTag("OPONION");
+                } else
+                {
+                    Picasso.with(getActivity()).pauseTag("OPONION");
+                }
+            }
+        });
+
+        v.findViewById(R.id.fab_community).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                context.startActivity(new Intent(getActivity(),
+                        ActivityCommunity.class));
+            }
+        });
 
         addTestOponionFeeds();
 

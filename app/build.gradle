@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "23.0.3"
+    buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.app.oponion"
         minSdkVersion 19
@@ -43,6 +43,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
 }
 
 apply plugin: 'com.google.gms.google-services'

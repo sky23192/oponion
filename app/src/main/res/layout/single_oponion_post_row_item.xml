@@ -8,11 +8,12 @@
     android:background="@drawable/rounsed_bg"
     android:elevation="3dp">
 
-    <ImageView
+    <com.github.siyamed.shapeimageview.mask.PorterShapeImageView
         android:id="@+id/iv_oponionFeedImage"
-        android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="200dp"
+        app:siShape="@drawable/rounded_bg_black"
+        app:siSquare="false"/>
 
     <LinearLayout
         android:layout_width="match_parent"
